@@ -1,0 +1,33 @@
+{
+  "name": "filtering",
+  "version": "v2.7.0",
+  "description": "A client view for capturing and managing filter history.",
+  "homepage": "https://github.com/ptrdo/filtering#readme",
+  "author": "psylwester@idmod.org",
+  "license": "CC-BY-NC-SA-4.0",
+  "main": "filtering.js",
+  "files": [
+    "/filtering.js",
+    "/demo/build/css/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ptrdo/filtering.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ptrdo/filtering/issues"
+  },
+  "keywords": [
+    "javascript",
+    "dashboard",
+    "visualization",
+    "hpc"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "microdata-template": "^2.2.2"
+  }
+}

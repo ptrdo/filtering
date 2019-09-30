@@ -1,0 +1,204 @@
+﻿@charset "UTF-8";
+
+/**
+ * (c) 2015 Intellectual Ventures
+ * pageControl styles
+ *
+ * @author bressler(at)intven(dot)com
+ * @version 1.0.0.0 2015/06/05
+ * @requires normalize.css (or equivalent)
+ *
+ * THIS STYLESHEET RESERVED FOR RULES:
+ *  pageControl and related subcontrols
+ *
+ *  These styles should change infrequently.
+ *
+ */
+
+/* ------------------------------------------------------------------------- */
+/* pageControl */
+/* ------------------------------------------------------------------------- */
+div.pageControl
+{
+	margin: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+  align-items: center;
+}
+div.pageControl button.pager
+{
+  display: inline-block;
+  min-width: 32px;
+  height: 32px;
+  margin: 0 0 0 4px;
+  padding: 0;
+  background: white linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+  border: 1px solid silver;
+  text-align: center;
+  color: #0072a2;
+  line-height: 0.9em;
+  cursor: pointer;
+}
+div.pageControl button.pager.pageForward
+{
+  border-radius: 0 16px 16px 0;
+}
+div.pageControl button.pager.pageBackward
+{
+  border-radius: 16px 0 0 16px;
+}
+div.pageControl button.pager.pageLast,
+div.pageControl button.pager.pageFirst
+{
+  border-radius: 16px;
+}
+div.pageControl button.pager.pageCurrent
+{
+  margin: 0 -2px;
+  padding: 0 8px;
+  cursor: default;
+}
+div.pageControl span.small-caps
+{
+  color: #0072A2;
+  font-size: 11px;
+}
+div.pageControl button.pager.pageForward
+{
+  margin-left: -1px;
+}
+div.pageControl button.pager:hover:not([disabled])
+{
+  border-color: #0072a2;
+}
+div.pageControl button.pager:active
+{
+  border-color: black;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+div.pageControl > input[type=text]
+{
+  color: #0072A2;
+  height: 32px !important;
+  width: 56px;
+  border: 1px solid silver;
+  margin: 0 0 0 -1px;
+  box-sizing: border-box;
+  padding: 4px 8px !important;
+  text-align: center !important;
+}
+div.pageControl button.pager[disabled],
+div.pageControl input[disabled]
+{
+  background: #eeeeee;
+  cursor: default;
+  color: darkgray;
+}
+div.pageControl button.pager.pageFirst {
+  margin-left: 0;
+}
+div.pageControl fieldset.pages {
+  margin-left: -1px;
+  background-color: white;
+  border: none;
+}
+div.pageControl fieldset button.pager
+{
+  padding: 0 6px 0 6px;
+  height: 32px;
+  margin: 0 0 0 0;
+  min-width: 100px;
+}
+div.pageControl input[type=text].currentPage.badInput
+{
+  background-color: pink;
+}
+div.pageControl fieldset input[type=text] /* Edit item in menu */
+{
+  text-align: center;
+  width: 40px;
+  display: inline-block;
+  padding: 4px 8px;
+  height: 16px;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	color: red;
+}
+div.pageControl input[type=text]
+{
+  display: inline-block;
+  background-color: white;
+  margin-left: -1px !important;
+}
+div.pageControl input[type=text].customCount
+{
+  background-color: white;
+  text-align: center;
+  padding: 4px 8px;
+  width: 2em;
+}
+div.pageControl input[type=text].customCount:invalid
+{
+  background-color: lightpink;
+}
+div.pageControl > input[type=text]:hover
+{
+  border-color: #0072a2;
+}
+div.pageControl menu.dropdown > ul
+{
+  min-width: unset !important;
+}
+div.pageControl fieldset
+{
+  border: none;
+  height: 32px;
+}
+div.pageControl fieldset div.menuCaption
+{
+  margin-bottom: 4px;
+  color: silver;
+}
+
+/* fontawesome overrides */
+
+.pager i.fa.fa-play
+{
+  -webkit-transform: scale(.7, .7);
+  -ms-transform: scale(.7, .7);
+  transform: scale(.7, .7);
+}
+
+.pager i.fa.fa-play.fa-flip-horizontal
+{
+  -webkit-transform: scale(-.7, .7);
+  -ms-transform: scale(-.7, .7);
+  transform: scale(-.7, .7);
+}
+
+.pager i.fa.fa-step-backward, 
+.pager i.fa.fa-step-forward 
+{
+  -webkit-transform: scale(1.2, .7);
+  -ms-transform: scale(1.2, .7);
+  transform: scale(1.2, .7);
+}
+
+/* bootstrap overrides */
+
+.pager:before, 
+.pager:after {
+  content: unset;
+  display: unset;
+}

@@ -1,0 +1,2992 @@
+﻿@charset "UTF-8";
+
+/*
+ * (c) 2016 Intellectual Ventures
+ * Module: Explore CORE
+ *
+ * @version 2.0.0 2016/06/09
+ * @requires normalize.css (or equivalent)
+ *
+ * THIS STYLESHEET RESERVED FOR RULES:
+ * #explore module layout, grid, filters 
+ */
+
+body.explore 
+{
+/*FULL-WINDOW*/
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body.explore #content section#explore {
+	display: block;
+}
+
+/* WORKSPACE-LAYOUT */ 
+
+.workspace 
+{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+
+  /*
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  */
+
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 5px;
+  right: 5px;
+
+  background: whitesmoke;
+  overflow: hidden;
+}
+
+.workspace > * 
+{
+  flex-grow: 1;
+  height: 50%;
+}
+
+.workspace .split .wrap 
+{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.workspace .split .wrap > * 
+{
+  align-items: stretch;
+  width: 50%;
+  height: inherit;
+}
+
+.workspace.wide-first aside.work-grid
+{
+  -webkit-order: -1;
+  -ms-flex-order: -1;
+  order: -1;
+}
+
+.workspace.wide-last aside.work-grid
+{
+  -webkit-order: 2;
+  -ms-flex-order: 2;
+  order: 2;
+  z-index: 1;
+}
+
+.workspace > .split 
+{
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  box-sizing: border-box;
+}
+
+.workspace.wide-first 
+{
+/* to account for content's horizontal scrolling */
+  bottom: 0;
+}
+
+.workspace.wide-first > .split 
+{
+  border-top: 1px solid white;
+}
+
+.workspace.wide-last > .split 
+{
+}
+
+html[data-useragent*="Firefox"] .workspace.wide-last > .split 
+{
+/* TODO: remediate this hack! */
+  padding-bottom: 0;
+}
+
+body.minmax .workspace
+{
+  top: 0;
+}
+
+.workspace > aside
+{
+  margin: 0;
+  background: white;
+  border: 1px solid transparent; 
+  white-space: nowrap;
+}
+
+/* LAYOUT DEFAULT */
+
+.workspace aside.work-detail, 
+.workspace aside.work-detail .truss,
+.workspace aside.work-exhibit, 
+.workspace aside.work-exhibit .truss
+{
+  height: inherit;
+  box-sizing: border-box;
+}
+
+.workspace aside.work-detail,
+.workspace aside.work-exhibit
+{
+  width: 50%;
+}
+
+/* LAYOUT MODES */
+
+.workspace.wide-first .split .wrap 
+{
+  border: none;
+  border-top: 2px solid #002B3D;
+}
+
+.workspace.wide-first .work-grid, 
+.workspace.wide-last .split .wrap 
+{
+  border: none;
+}
+
+.workspace.wide-last .work-grid 
+{
+  border: none;
+  border-top: 3px solid #0072a2;
+}
+
+.workspace.wide-first aside.work-exhibit, 
+.workspace.wide-first aside.work-detail 
+{
+  border: none; 
+  border-right: 1px solid #0072a2;
+}
+
+.workspace.wide-last aside.work-exhibit, 
+.workspace.wide-last aside.work-detail 
+{
+  border: none; 
+  border-right: 1px solid #0072a2;
+}
+
+/* EXPLORE-LAYOUT-OVERRIDES */
+/* TODO: COALESCE WITH RULES ABOVE */
+
+#explore > .wrap, 
+#explore > .wrap .workspace 
+{
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#explore > .wrap .workspace 
+{
+  padding-top: 50px;
+}
+
+#explore .workspace-grid 
+{
+  overflow-y: scroll;
+}
+
+#explore .workspace-grid .truss 
+{
+  margin: 10px;
+}
+
+.workspace-grid > .truss > .query 
+{
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.workspace-grid > .truss > .grid 
+{
+  margin: 5px;
+  margin-top: 10px;
+  margin-bottom: 2em;
+  padding-bottom: 4px;
+  border-bottom: 1px dotted orangered;
+}
+
+/* EXPLORE WORKSPACE CUSTOMIZATIONS */
+/* TODO: COALESCE WITH RULES ABOVE */ 
+
+#explore .workspace-detail 
+{
+  border-right: 1px solid #0072a2;
+  background: white;
+}
+
+#explore .workspace-exhibit 
+{
+  background: white;
+}
+
+.workspace.wide-first > .workspace-grid 
+{
+  height: 95%;
+}
+
+.workspace.wide-first > .split 
+{
+  height: 5%;
+}
+
+/* RESIZER */
+/* TODO: REMOVE SCOPE (#explore) */ 
+
+#explore .resizer 
+{
+  position: absolute;
+  margin: -15px 0 0 -15px;
+  padding: 0; 
+  top: 96%;
+  left: 50%;
+  border: 1px solid #21374c;
+  box-sizing: content-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  vertical-align: top;
+  z-index: 2;
+}
+
+body.minmax #explore .resizer  
+{
+  margin-top: -40px;
+}
+
+#explore .resizer button 
+{
+  display: block; 
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+	border-radius: 0;
+}
+
+html[data-useragent*="Mac OS X"] #explore .resizer button 
+{
+	-webkit-appearance: none;
+  -webkit-border-radius: 0;
+	background: linear-gradient(to bottom, #f7f7f7 0%, #dddddd 100%);
+	border-width: 1px;
+}
+
+#explore .resizer button.freeform 
+{
+  cursor: move;
+}
+
+html[data-useragent*="Firefox"] #explore .resizer button 
+{
+  border-color: transparent;
+}
+
+html[data-useragent*="Firefox"] #explore .resizer button.freeform
+{
+  border-bottom: 1px solid #ccc;
+}
+
+#explore .resizer button.dock-toggle
+{
+  cursor: pointer;
+}
+
+#explore .resizer button i.material-icons
+{
+	display: inline-block;
+  width: 24px;
+  height: 24px;
+	font-size: 24px;
+}
+
+#explore .resizer button i.material-icons.icon-grip
+{
+  transform: rotate(90deg);
+  width: 24px;
+}
+
+#explore .resizer.docked button i.material-icons.icon-down
+{
+  transform: rotate(180deg);
+  width: 24px;
+}
+
+#explore .resizer button i.material-icons 
+{
+  color: #bbb;
+}
+
+#explore .resizer button.dock-toggle i.material-icons
+{
+  color: #0072a2;
+}
+
+html:not([data-useragent*="Trident"])
+#explore .resizer button:hover 
+{
+  background: #a6f4ff;
+}
+
+#explore .resizer button:active, 
+#explore .resizer.active button.freeform 
+{
+  background: #21374c !important;
+  border-color: white;
+}
+
+#explore .resizer button:active span 
+{
+  color: #a6f4ff !important;
+}
+
+#explore .resizer button:active i.material-icons 
+{
+  color: #a6f4ff !important;
+}
+
+
+/* ABOVE */ 
+
+#explore .z-level-holder.active.query 
+{
+  position: absolute; 
+  margin: -5px;
+}
+
+#explore .z-level-holder.active.query fieldset button.btn 
+{
+  display: none;
+  border-color: black;
+}
+
+#explore .z-level-holder.active.query fieldset.edit button.btn 
+{
+  display: block;
+  visibility: hidden;
+}
+
+#explore .z-level-holder.active.query fieldset.active button.btn
+{
+  display: block;
+}
+
+/* QUERY BUILDER */
+
+.query 
+{
+  position: relative;
+  min-width: 230px;
+  min-height: 48px;
+  /*
+  margin: 0 0 1em 0;
+  padding: 6px;
+  border: 1px dotted #4d8bb8;
+  background-color: white;
+  */
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color:transparent;  
+  padding-right: 290px;
+  transition-property: background-color;
+  transition-delay: 500ms;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+}
+
+body.fetching .query 
+{
+  background-color: #77cc77;
+  transition-delay: unset;
+}
+
+.query form 
+{
+  padding: 0 5px;
+
+  display: -ms-flexbox;
+  -ms-box-orient: horizontal;
+  -ms-flex-direction: row;
+  -ms-flex-wrap: wrap;
+  -ms-justify-content: flex-start;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.query form fieldset
+{
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  border: 1px solid transparent;   
+  z-index: 2;
+}
+
+.query form > fieldset 
+{
+  /* filters only, not pagers */
+  margin: 5px 5px 5px 0;
+}
+
+.query form fieldset:empty 
+{
+  display: none !important; 
+}
+
+.query form input[type="reset"]
+{
+  display: none; 
+}
+
+.query .trouble form input[type="submit"],
+.query .trouble form button.refresh 
+{
+  display: none; 
+}
+
+.query .trouble form input[type="reset"] 
+{
+  display: inline-block; 
+}
+
+.query form fieldset.entity
+{
+  z-index: 3;
+
+  -ms-order: -1;
+  -webkit-box-ordinal-group: 0;
+  -webkit-order: -1;
+  -ms-flex-order: -1;
+  order: -1;
+}
+
+.query form fieldset.column 
+{
+  -ms-order: 1;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+}
+
+.query form fieldset[data-name=Owner],
+.query form fieldset[data-parameter=Owner] 
+{
+  z-index: 4;
+  -ms-order: 0;
+  -webkit-box-ordinal-group: 1;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+}
+
+.query form fieldset.draft
+{
+  -ms-order: 97;
+  -webkit-box-ordinal-group: 98;
+  -webkit-order: 97;
+  -ms-flex-order: 97;
+  order: 97;
+}
+
+.query form fieldset.penultimate 
+{
+  -ms-order: 98;
+  -webkit-box-ordinal-group: 99;
+  -webkit-order: 98;
+  -ms-flex-order: 98;
+  order: 98;
+}
+
+.query form fieldset.ultimate 
+{
+  -ms-order: 99;
+  -webkit-box-ordinal-group: 100;
+  -webkit-order: 99;
+  -ms-flex-order: 99;
+  order: 99;
+}
+
+.query form fieldset.anchor 
+{
+  white-space: nowrap;
+  text-align: right;
+
+  -webkit-box-ordinal-group: 101;
+  -webkit-order: 100;
+  -ms-flex-order: 100;
+  order: 100;
+
+  -webkit-box-flex: 2;
+  -webkit-flex-grow: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+}
+
+.query form fieldset.columns, 
+.query form fieldset.filters 
+{
+  z-index: 1;
+}
+
+.query form fieldset.active 
+{
+  z-index: 5;
+}
+
+.query form fieldset.control
+{
+  visibility: visible;
+  background: #0072a2;
+  -ms-order: 99;
+  -webkit-box-ordinal-group: 100;
+  -webkit-order: 99;
+  -ms-flex-order: 99;
+  order: 99;
+}
+
+body.fetching .query form fieldset.control
+{
+  visibility: hidden;
+}
+
+.query form > button.refresh
+{
+  margin: 8px;
+  vertical-align: middle;
+
+  -ms-order: 100;
+  -webkit-box-ordinal-group: 101;
+  -webkit-order: 100;
+  -ms-flex-order: 100;
+  order: 100;
+}
+
+body.fetching .query form > button.refresh 
+{
+/* mix-blend-mode: multiply; */
+  cursor: default;
+}
+
+html[data-useragent*="Mac OS"] .query form > ins a 
+{
+  line-height: 1.3;
+}
+
+.query form > ins:hover a,
+.query form > ins a:hover 
+{
+  color: white;
+  background-color: #4d8bb8;
+}
+
+.query form > ins:active a,
+.query form > ins a:active 
+{
+  color: white;
+  background-color: #21374c;
+}
+
+.query form fieldset button 
+{
+  font-size: 1em;
+}
+
+.query form fieldset > *, 
+.query form fieldset > button > *
+{
+  vertical-align: middle;
+}
+
+.query form fieldset button dfn
+{
+  text-transform: uppercase;
+}
+
+.query form fieldset button var
+{
+  font-weight: bold;
+  color: #0072a2;
+  vertical-align: middle;
+}
+
+.query form fieldset button kbd 
+{
+  line-height: 0;
+  font-size: 1em; 
+  text-decoration: none;
+  color: #0072a2;
+  vertical-align: middle;
+/* unset bootstrap */
+	padding: 0;
+	font-size: 100%;
+	background-color: transparent;
+	border-radius: 0;
+	padding: unset;
+	font-size: unset;
+	background-color: unset;
+	border-radius: unset;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.query form fieldset ins button.btn:focus 
+{
+  font-weight: bold;
+  background: linear-gradient(to bottom, #ffffff 0%, lightsteelblue 100%)
+}
+
+.query form fieldset button kbd:empty,
+.query form fieldset button var:empty 
+{
+  display: none !important;
+}
+
+.query form fieldset button.ternary kbd:empty 
+{
+  content: "=";
+}
+
+.query form fieldset button small
+{
+  font-size: 12px;
+}
+
+.query form fieldset button dfn + var,
+.query form fieldset button dfn + kbd,
+.query form fieldset button kbd + var,
+.query form fieldset button var + kbd
+{
+  padding-left: 6px;
+}
+
+.query form fieldset button dfn + small,
+.query form fieldset button var + small
+{
+  padding-left: 10px;
+}
+
+.query form fieldset input[type="text"]
+{
+  position: relative;
+  display: inline-block;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+  text-align: left;
+  box-shadow: none;
+}
+
+.query form fieldset.filter input[type="text"] 
+{
+  display: none;
+  margin: 0 -4px;
+  padding: 8px;
+	box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+}
+
+.query form fieldset.text.edit, 
+.query form fieldset.object.edit
+{
+  background: black;
+  padding: 1px;
+}
+
+.query form fieldset.text.edit > button, 
+.query form fieldset.text.edit > input 
+{
+  float: left;
+}
+
+.query form fieldset.object.edit > button, 
+.query form fieldset.object.edit > input, 
+.query form fieldset.object.edit > ins, 
+.query form fieldset.object.edit > span
+{
+  float: left;
+}
+
+.query form fieldset.text.edit > button, 
+.query form fieldset.object.edit > button:first-of-type 
+{
+  padding: 3px 15px 3px 10px;
+}
+
+.query form fieldset.text.edit > button:active,
+.query form fieldset.object.edit > button:first-of-type:active {
+  padding: 4px 15px 2px 10px;
+}
+
+.query form fieldset.edit menu 
+{
+  position: absolute;
+  top: 100%;
+}
+
+.query form fieldset.edit small,
+.query form fieldset.edit button var
+{
+  display: none;
+}
+
+.query form fieldset input[type="button"],
+.query form fieldset ins
+{
+  display: none;
+}
+
+.query form fieldset.edit input[type="text"],
+.query form fieldset.edit input[type="button"],
+.query form fieldset.edit ins
+{
+  display: inline-block;
+  outline: 0;
+}
+
+.query form fieldset.key-only ins
+{
+  display: none;
+}
+
+.query form fieldset.edit input[type="text"]
+{
+  width: 20em;
+}
+
+.query form fieldset.reducible > button
+{
+	border: 1px dotted red;
+	background: lemonchiffon;
+}
+
+.query form fieldset.reducible > button > * 
+{
+	opacity: 0.6;
+}
+
+.query fieldset.ultimate button.reduce 
+{
+	display: none;
+}
+
+.query .reducible fieldset.ultimate button.reduce 
+{
+	display: inline-block;
+}
+
+/* EXCEPTIONS (GUID truncation elipsis) */
+
+.query form fieldset[data-parameter=Id] button:first-child var:after, 
+.query form fieldset[data-parameter=ExperimentId] button:first-child var:after, 
+.query form fieldset[data-parameter=SuiteId] button:first-child var:after 
+{
+  content: "\2026";
+}
+
+/* TAG EXCEPTIONS */
+
+.query form fieldset[data-name="Tag"].edit button var 
+{
+  display: inline-block;
+  vertical-align: top;
+  max-width: 5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.query form fieldset[data-name="Tag"].edit input[type="text"] 
+{
+  height: 17px; /* because of interstitial ins? */
+}
+
+/* TAG KEY+VALUE */
+
+.query form fieldset[data-parameter="Tag"].edit input[name="key"]
+{
+  width: 12em;
+}
+
+.query form fieldset[data-parameter="Tag"].edit input[name="value"]
+{
+  width: 6em;
+}
+
+.query form fieldset[data-parameter="Tag"].edit.key-only input[name="value"] 
+{
+  display: none; 
+}
+
+/* TAG RANGE FILTER */ 
+
+.query form fieldset[data-parameter="Tag"].edit.key-value-range input[name="floor"],
+.query form fieldset[data-parameter="Tag"].edit.key-value-range input[name="ceiling"]
+{
+  width: 4em;
+}
+
+.query form fieldset[data-parameter="Tag"].edit span.range,
+.query form fieldset[data-parameter="Tag"].edit.key-value-range button.ternary,
+.query form fieldset[data-parameter="Tag"].edit.key-value-range input[name="value"]
+{
+  display: none;
+}
+
+.query form fieldset[data-parameter="Tag"].edit.key-value-range span.range, 
+.query form fieldset[data-parameter="Tag"].edit.key-value-range span.range ins.btn
+{
+  display: inline-block;
+}
+
+.query form fieldset[data-parameter="Tag"].key-value-range button var + kbd
+{
+  display: none; /* the token ">=<" operator*/
+}
+
+.query form fieldset[data-parameter="Tag"].key-value-range > button var:last-of-type:before
+{
+  content: "\0230A";
+  color: #c00;
+  font-weight: normal;
+  margin-right: 3px;
+}
+
+.query form fieldset[data-parameter="Tag"].key-value-range > button var:last-of-type:after
+{
+  content: "\02309";
+  color: #c00;
+  font-weight: normal;
+  margin-left: 3px;
+}
+
+.query fieldset[data-parameter=Owner] menu.dropdown > ul > li.hot > a, 
+.query fieldset[data-parameter=Owner] menu.dropdown > ul > li.hot > a:visited  
+{
+  margin: 0;
+  border: none;
+  border-bottom: 1px dotted #0094d1;
+  text-decoration: none;
+  color: red;
+}
+
+#explore .query fieldset[data-parameter=Owner] menu.dropdown > ul > li.hot > a
+{
+  border: none;
+}
+
+.query fieldset[data-parameter=Owner] menu.dropdown > ul > li.hot > a:hover,
+.query fieldset[data-parameter=Owner] menu.dropdown > ul > li.hot > a:focus  
+{
+  color: white;
+}
+
+.query fieldset menu.secondary.dropdown,
+.query fieldset ins menu.dropdown
+{
+  display: none;
+}
+
+.query fieldset.edit menu.secondary.dropdown,
+.query fieldset ins.active menu.dropdown
+{
+  display: block;
+}
+
+.query fieldset ins menu.dropdown 
+{
+/* TAG operator select */
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.query fieldset > menu.dropdown > ul 
+{
+/* exception to beef-up narrow first-tier menus */
+  min-width: 8em;
+}
+
+.query fieldset.narrow menu
+{
+  position: absolute;
+}
+
+/* EXPRESSION MENU OVERRIDES */
+/* TODO: COALESCE WITH ABOVE RULES */
+
+#explore menu.dropdown > ul 
+{
+  max-height: none;
+}
+
+#explore fieldset[data-parameter=Owner] menu.dropdown > ul 
+{
+  max-height: 20em;
+}
+
+#explore menu.dropdown > ul > li > a, 
+#explore menu.dropdown > ul > li > span 
+{
+  /* font-size: 1em; */
+  padding: 0.3em 0.8em 0.3em 0.5em;
+	width: 100%;
+}
+
+/* EXPRESSION BTN OVERRIDES */
+/* TODO: COALESCE WITH ABOVE RULES */
+
+.query form .btn
+{
+  position: relative;
+  padding: 4px 10px;
+  vertical-align: middle;
+}
+
+.query form .btn:hover
+{
+  padding-top: 3px;
+  padding-bottom: 5px;
+}
+
+.query form .btn:active
+{
+  padding-top: 5px;
+  padding-bottom: 3px;
+  /* background: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%); */
+}
+
+.query form fieldset.entity .btn 
+{
+  background: linear-gradient(to bottom, #f4f0cb 0%, #d5d098 100%);
+  border-color: #607D8A;
+}
+
+.query form fieldset.entity .btn:active 
+{
+  background: #d7d199 linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%);
+  border-color: black;
+}
+
+.fetching .query form fieldset.entity .btn 
+{
+  /* background: rgba(215, 209, 153, 0.5); */
+}
+
+/* QUERY CUSTOMIZATION */
+/* TODO: COALESCE WITH RULES ABOVE */
+
+#explore .query
+{
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+#explore .query .anchor var 
+{
+  font-weight: normal;
+}
+
+#explore .query .anchor .pagerBox
+{
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 2px;
+}
+
+#explore .query .anchor .count
+{
+  line-height: 2em;
+}
+
+#explore .query form > fieldset.anchor
+{
+  margin-right: 0;
+}
+
+#explore .penultimate > .btn 
+{
+  /* no text to prop this up */
+  padding-bottom: 5px;
+}
+
+#explore .penultimate > .btn:hover {
+  padding-bottom: 6px;
+}
+
+#explore .penultimate > .btn:active {
+  padding-bottom: 4px;
+}
+
+/* ROW-HEIGHT OPTIONS */
+
+#explore .query .anchor .rowVolumeOption 
+{
+  display: inline-block;
+  margin-right: 1em;
+}
+
+#explore .query .anchor .rowVolumeOption input[type=radio] 
+{
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  opacity: 0.0001;
+}
+
+#explore .query .anchor .rowVolumeOption label 
+{
+  margin: 1px -3px;
+  font-variant: small-caps;
+}
+
+#explore .query .anchor .rowVolumeOption label:not(.btn) 
+{
+  color: #0072a2;
+  margin: unset;
+  padding: unset;
+  padding-right: 0.5em;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+#explore .query .anchor .rowVolumeOption label.btn 
+{
+  /* prior appearance: button; rules are unsupported and problematic */
+}
+
+#explore .query .anchor .rowVolumeOption label.checked 
+{
+  outline: 0;
+  color: white;
+  background: #004766;
+  cursor: default;
+}
+
+#explore .query .anchor .rowVolumeOption label.checked:hover 
+{
+  padding: 4px 10px;
+}
+
+/* DATEPICKER OVERRIDES */
+
+#explore .bootstrap-datetimepicker-widget 
+{
+	background: white;
+	position: absolute;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+	border: 1px solid silver;
+}
+
+#explore .bootstrap-datetimepicker-widget table td, 
+#explore .bootstrap-datetimepicker-widget table td span:not(.glyphicon)
+{
+	white-space: normal;
+	line-height: 1;
+	height: 1em;
+}
+
+#explore .bootstrap-datetimepicker-widget table td.separator 
+{ 
+	font-weight: bold; 
+}
+
+#explore .bootstrap-datetimepicker-widget .btn 
+{
+	border-color: transparent;
+	padding: 0;
+}
+
+/* DATEPICKER OVERRIDES (old) */
+
+.query form fieldset.date.edit input[type="text"] 
+{
+  width: 10em;
+  text-align: center;  
+}
+
+.query form fieldset.date.edit {
+  z-index:unset;
+}
+
+#ui-datepicker-div 
+{
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default
+{
+  border: 1px solid #ffffff;
+}
+
+/* AUTOCOMPLETE OVERRIDES */
+
+ul.ui-autocomplete
+{
+  max-height: 12em;
+  overflow-y: auto;
+}
+
+ul.ui-autocomplete li.ui-menu-item a 
+{
+  padding-right: 2em;
+}
+
+/* TABLE (#explore module) */
+/* Extends idm-core.css (table.records) */
+
+.fetching #explore .grid 
+{
+  /* to blink the grid during fetch */
+  /* background: #fefe88; */
+  /* opacity: 0.7; */
+}
+
+/* TABLE > SIZING */
+
+#explore table.records th[data-item=Related],
+#explore table.records th[data-item=State]
+{
+  width: 6%;
+}
+
+#explore table.records.rowVolume-2 th[data-item=State]
+{
+  width: 3%;
+}
+
+#explore table.records th[data-item=DateCreated],
+#explore table.records th[data-item=LastModified]
+{
+  width: 6%
+}
+
+/* TABLE > NAME + DESCRIPTION + WORKER */
+
+#explore table.records th[data-item=Name],
+#explore table.records th[data-item=Description]
+{
+  width: 14%;
+}
+
+#explore table.records th[data-item=Meta]
+{
+  width: 22%;
+}
+
+#explore table.records td[itemprop=Meta] dl 
+{
+  display: inline-block;
+  line-height: 1.5;
+}
+
+#explore table.records dt[itemprop=Name] 
+{
+  min-width: 10em;
+  padding-right: 1em;
+  font-weight: bold;
+  white-space: normal;
+  word-break: break-all;
+}
+
+#explore table.records dt[itemprop=Name] a:hover
+{
+  text-decoration: none;
+  border-bottom-color: inherit;
+  border-bottom-style: groove;
+  border-bottom-width: 1px;
+}
+
+#explore table.records.rowVolume-0 dt[itemprop=Name]
+{
+  width: 100%;
+  max-width: 22em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: normal;
+}
+
+#explore table.records dd[itemprop=Description] 
+{
+  padding-right: 0;
+  white-space: normal;
+  word-break: break-word;
+}
+
+#explore table.records.rowVolume-0 tr.peek dt[itemprop=Name]
+{
+  white-space: normal;
+}
+
+#explore table.records.rowVolume-0 tr:not(.peek) td[itemprop=Meta] dd
+{
+  display: none;
+}
+
+
+/* TABLE > NARROW */
+
+@media screen and (max-width: 720px) 
+{
+  #explore table.records.rowVolume-0 dt[itemprop=Name],
+  #explore table.records.rowVolume-1 dt[itemprop=Name]
+  {
+    white-space: nowrap;
+    max-width: 11em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* TABLE > WIDE */
+
+@media screen and (min-width: 1440px)
+{
+  #explore table.records.rowVolume-0 dt[itemprop=Name]
+  {
+    max-width: 31em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 1em;
+  }
+}
+
+/* TABLE > TAGS */
+
+#explore table.records tr dl.tag 
+{
+  display: inline;
+  cursor: default;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+#explore table.records tr dl.tag:hover
+{
+  background: #fcd209;
+}
+
+#explore table.records tr.active dl.tag:hover
+{
+  background: #4d8bb8;
+}
+
+#explore table.records tr dl.tag dt,
+#explore table.records tr dl.tag dd 
+{
+  display: inline;
+  padding: 2px 4px;
+  white-space: nowrap;
+  line-height: inherit;
+  font-weight: normal;
+}
+
+#explore table.records tr dl.tag dd:first-of-type
+{
+  color: #cc0000;
+  padding: 2px 4px;
+}
+
+#explore table.records tr.active dl.tag dd 
+{
+  color: aqua;
+}
+
+#explore table.records tr dl.tag dd:last-of-type
+{
+  display: block;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#explore table.records tr dl.tag.compare dt
+{
+  color: black;
+  font-weight: bold;
+}
+
+#explore table.records tr.active dl.tag.compare dt 
+{
+  color: white;
+}
+
+#explore table.records.compare tr dl.tag.compare dt 
+{
+  font-weight: normal;
+} 
+
+#explore table.records.compare tr dl.tag:not(.compare) 
+{
+  display: none; 
+}
+
+#explore table.records.rowVolume-0 td[itemprop=Tags],
+#explore table.records.rowVolume-1 td[itemprop=Tags]  
+{
+  /* truncate very long tag values */
+  max-width: 20em;
+  overflow: hidden;
+}
+
+#explore table.records.rowVolume-0 tr td[itemprop=Tags] > div
+{
+  min-height: 1em;
+  max-height: 2em;
+  margin-right: 16px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#explore table.records.rowVolume-0 tr.peek td[itemprop=Tags] > div
+{
+  min-height: 5em;
+  max-height: 7em;
+  margin-right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  white-space: normal;
+  text-overflow: unset;
+}
+
+#explore table.records.rowVolume-1 tr td[itemprop=Tags] > div
+{
+  min-height: 3em;
+  max-height: 5em;
+  margin-right: 16px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: normal;
+  text-overflow: unset;
+}
+
+#explore table.records.rowVolume-1 tr td[itemprop=Tags]:hover > div  
+{
+  margin-right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  white-space: normal;
+}
+
+#explore table.records.rowVolume-0 tr dl.tag,
+#explore table.records.rowVolume-1 tr dl.tag
+{
+  display: inline-block; 
+}
+
+#explore table.records.rowVolume-0.repaint tr dl.tag,
+#explore table.records.rowVolume-1.repaint tr dl.tag
+{
+  /* Layout-thrashing via css-trigger. Re-evaluate on occasion. @see: #3878 */
+  display: inline-table;
+}
+
+#explore table.records.rowVolume-0 tr dl.tag dd:last-of-type,
+#explore table.records.rowVolume-1 tr dl.tag dd:last-of-type 
+{
+  position: absolute;
+  clear: left;
+}
+
+#explore table.records tr dl.tag dt + dd:empty 
+{
+  padding-right: 0;
+}
+
+#explore table.records tr dl.tag dt + dd:not(:empty):before
+{
+  content: ":";
+  margin-left: -10px;
+  margin-right: 6px;
+}
+
+#explore table.records tr dl.tag dt + dd:empty:before
+{
+  content: ",";
+  margin-left: -10px;
+  margin-right: 6px;
+}
+
+#explore table.records.rowVolume-0 tr dl.tag dt + dd:not(:empty):after,
+#explore table.records.rowVolume-1 tr dl.tag dt + dd:not(:empty):after
+{
+  content: ",";
+}
+
+#explore table.records:not(.rowVolume-2) tr dl.tag:last-of-type dd:not(:empty):after,
+#explore table.records:not(.rowVolume-2) tr dl.tag:last-of-type dt + dd:empty:before,
+#explore table.records.rowVolume-2 tr dl.tag dt + dd:before
+{
+  content: "";
+}
+
+#explore table.records th[data-item=Tags] a
+{
+  padding: 2px 10px;
+  margin: 0 0 0 1em;
+  font-weight: normal;
+  color: #004766;
+  border-radius: 1em;
+  text-decoration: none;
+}
+
+#explore table.records th[data-item=Tags] a:hover
+{
+  background-color: white;
+  color: #004766;
+}
+
+#explore table.records th[data-item=Tags] a:active
+{
+  background-color: #004766;
+  color: white;
+}
+
+  /* TABLE > TAGS (TRUNCATE) */
+
+#explore table.records td[itemprop=Tags] div[data-truncated=true] dl:last-of-type
+{
+  display: block;
+  padding: 3px 6px;
+  margin: 5px 0;
+  margin-right: 1em;
+  vertical-align: top;
+  background: whitesmoke;
+  white-space: nowrap;
+  border: 1px solid #c2c2b8;
+  border-radius: 0;
+  line-height: 1.5;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: smaller;
+  font-weight: bold;
+  color: #0072a2;
+}
+
+#explore table.records td[itemprop=Tags] div[data-truncated=true] dl:last-of-type dt, 
+#explore table.records td[itemprop=Tags] div[data-truncated=true] dl:last-of-type dd 
+{
+  display: inline-block;
+}
+
+#explore table.records td[itemprop=Tags] div[data-truncated=true] dl:last-of-type:focus
+{
+  border-color: black;
+}
+
+#explore table.records td[itemprop=Tags] div[data-truncated=true] dl:last-of-type:hover
+{
+  background-color: #00b3ff;
+  border-color: black;
+  color: #21374c;
+  cursor: pointer;
+}
+
+#explore table.records td[itemprop=Tags] div[data-truncated=true] dl:last-of-type:active
+{
+  outline: 0;
+  color: white;
+  border-color: black;
+  background-color: #004766;
+  -webkit-box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+#explore table.records tr.active td[itemprop=Tags] div[data-truncated=true] dl:last-of-type dd 
+{
+  color: #cc0000; 
+}
+
+#explore table.records tr td[itemprop=Tags] div[data-truncated=true] dl:last-of-type:active dd 
+{
+  color: cyan; 
+}
+
+/* TABLE > DATES */
+
+#explore table.records th.date 
+{
+  padding: 6px 0 8px 0;
+}
+
+#explore table.records td.date 
+{
+  text-align: right;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  white-space: normal;
+  line-height: 1.5;
+  font-size: smaller;
+}
+
+#explore table.records td.date span,
+#explore table.records td.date time 
+{
+  padding: 0 4px;
+}
+
+#explore table.records td.date time 
+{
+  color: #0094d1;
+  cursor: pointer;
+}
+
+#explore table.records td.date time:hover  
+{
+  background: #fcd209;
+  color: black !important;
+}
+
+#explore table.records tr.active td.date time
+{ 
+  color: aqua;
+}
+
+#explore table.records th[data-item=LastModified] a:hover
+{
+  background-color: white;
+  color: #004766;
+}
+
+#explore table.records th[data-item=LastModified] a:active
+{
+  background-color: #004766;
+  color: white;
+}
+
+#explore table.records th[data-item=LastModified],
+#explore table.records td[data-item=LastModified]
+{
+  display: table-cell;
+}
+
+#explore table.records.rowVolume-0 th[data-item=LastModified],
+#explore table.records.rowVolume-0 td[itemprop=LastModified]
+{
+  display: none;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=DateCreated]
+{
+  white-space: nowrap;
+}
+
+
+/* TABLE of RECORDS TAG/TIME POPUPS */
+
+#explore table.records tr dl.tag menu,
+#explore table.records tr time menu
+{
+  display: block;
+  position: absolute;
+  margin-top: -2px;
+  overflow: visible;
+  z-index: 3;
+}
+
+#explore table.records dl.tag menu,
+#explore table.records tr time menu
+{
+  font-size: smaller;
+}
+
+html[data-useragent*="Firefox"] #explore table.records tr dl.tag menu,
+html[data-useragent*="Firefox"] #explore table.records tr time menu 
+{
+  /* NOTE: Should FF flip-flop on honoring scrollTop (again), re-enable this... */ 
+  /* margin-top: -2px !important; */
+}
+
+#explore table.records tr time 
+{
+  display: inline-block;
+}
+
+#explore table.records tr time menu 
+{
+  position: relative;
+  height: 0 !important;
+  margin-right: -10px;
+}
+
+#explore table.records tr time menu > ul 
+{
+  position: absolute;
+  right: 0;
+}
+
+#explore table.records tr time menu 
+{
+  position: absolute; 
+}
+
+#explore table.records tr time menu > ul
+{
+  margin-right: -100px;
+}
+
+#explore table.records tr dl.tag menu > ul,
+#explore table.records tr time menu > ul
+{
+  padding: 3px;
+  border: 1px solid #cccccc;
+  border: 1px solid #21374c;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  background-color: white;
+}
+
+#explore table.records tr dl.tag menu > ul > li,
+#explore table.records tr time menu > ul > li
+{
+  display: block;
+  padding: 0.4em 0.7em 0.4em 0.6em;
+  white-space: nowrap;
+  font-weight: normal;
+  text-align: left;
+  color: #004766;
+  border-bottom: 1px dotted silver;
+}
+
+#explore table.records tr dl.tag menu > ul > li:last-of-type,
+#explore table.records tr time menu > ul > li:last-of-type 
+{
+  border-bottom: 1px solid white;
+}
+
+#explore table.records tr dl.tag menu > ul > li:hover,
+#explore table.records tr dl.tag menu > ul > li:focus,
+#explore table.records tr time menu > ul > li:hover,
+#explore table.records tr time menu > ul > li:focus
+{
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #0072a2;
+}
+
+#explore table.records tr dl.tag menu > ul > li:active, 
+#explore table.records tr time menu > ul > li:active
+{
+  background-color: #004766;
+}
+
+#explore table.records th[data-item=Selection],
+#explore table.records td[itemprop=Selection] 
+{
+  width: 1%;
+  text-align: center;
+	border-left: 1px solid transparent;
+}
+
+#explore table.records th[data-item=Owner],
+#explore table.records td[itemprop=Owner] 
+{
+  width: 1%;
+  text-align: left;
+  min-width: 5em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: smaller;
+	cursor: default;
+  white-space: nowrap;
+}
+#explore table.records:not(.rowVolume-0) td[itemprop=Owner]
+{
+  white-space: normal;
+  word-break: break-all;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=Owner] span
+{
+  width: 4em;
+  white-space: nowrap;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+  /* TABLE > RELATED */
+
+#explore table.records td[itemprop=Related]
+{
+  text-align: center;
+  white-space: normal;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=Related] > div
+{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  margin-right: 8px;
+}
+
+#explore table.records tr.active td[itemprop=Related]
+{
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#explore table.records td[itemprop=Related]:empty:hover
+{
+  background: inherit;
+  cursor: default;
+}
+
+#explore table.records td[itemprop=Related]:empty:after
+{
+  content: "\00D8";
+}
+
+#explore table.records td[itemprop=Related] span
+{
+  display: block;
+}
+
+#explore table.records td[itemprop=Related] a 
+{
+  display: block;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=Related] a
+{
+  display: inline-block;
+  margin: 4px 3px;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=Related] a[rel=relationship]
+{
+  order: 9;
+}
+
+#explore table.records td[itemprop=Related]:hover a 
+{
+  text-decoration: none;
+}
+
+#explore table.records td[itemprop=Related] a:hover 
+{
+  text-decoration: underline;
+}
+
+#explore table.records td[itemprop=Related] a > * 
+{
+  display: inline-block; 
+  min-width: 0.8em;
+  width: 75%;
+  height: 1.5em;
+  margin: 2px;
+  padding: 1px 9px;
+	background-color: #A5CDDE;
+  color: #456;
+  font-size: smaller;
+  line-height: 1.5;
+  text-align: center;
+  border-radius: 1em;
+  cursor: pointer;
+	box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+}
+
+#explore table.records tr.active td[itemprop=Related] a > * 
+{
+	background-color: rgba(255, 255, 255, 0.3);
+	background: #A5CDDE linear-gradient(to top, #A5CDDE, #e6eff5);
+	color: black; 
+}
+
+#explore table.records tr.active td[itemprop=Related] a:hover > *,
+#explore table.records td[itemprop=Related] a:hover > *
+{
+  background-color: #fcd209;
+  color: black;
+}
+
+#explore table.records tr.active td[itemprop=Related] a:active > *,
+#explore table.records td[itemprop=Related] a:active > * 
+{
+  background: #fea004;
+  color: white;
+}
+
+#explore table.records td[itemprop=Related] a.disabled, 
+#explore table.records td[itemprop=Related] a.disabled > *
+{
+  color: silver;
+  background: transparent;
+  cursor: default;
+}
+
+#explore table.records td[itemprop=Related] a var:empty 
+{
+  display: none;
+}
+
+/* TABLE > FAVORITES */
+
+#explore table.records th[data-item=Favorite]
+{
+  width: 1%;
+}
+
+#explore table.records th[data-item=Favorite] 
+{
+  font-size: larger;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#explore table.records th[data-item=Favorite]:hover 
+{
+  color: #0072a2;
+}
+
+#explore table.records th[data-item=Favorite]:active 
+{
+  color:  #fcd209;
+  background-color: #004766;
+}
+
+#explore table.records td[itemprop=Favorite] 
+{
+  text-align: center;
+}
+
+#explore table.records tr[data-editable=true] td[itemprop=Favorite] span
+{
+  cursor: pointer;
+}
+
+/* FAVORITES */
+
+#explore table.records td[itemprop=Favorite]
+{
+  padding: 3px 0;
+}
+
+#explore table.records td[itemprop=Favorite] 
+label input + span 
+{
+  color: transparent;
+  font-size: 21px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+#explore table.records td[itemprop=Favorite] span 
+{
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  color: transparent;
+}
+
+#explore table.records td[itemprop=Favorite] input
+ {
+  display: none;
+}
+
+#explore table.records tr[data-editable=true] td[itemprop=Favorite] 
+label input + span 
+{
+  color: rgba(0, 0, 0, 0.2);
+}
+
+#explore table.records tr[data-editable=true].active td[itemprop=Favorite] 
+label input + span 
+{
+  color: rgba(255, 255, 255, 0.2);
+}
+
+#explore table.records td[itemprop=Favorite] label input:checked + span 
+{
+  color: #0072a2 !important;
+}
+
+#explore table.records tr.active td[itemprop=Favorite] 
+label input:checked + span 
+{
+  color: aqua !important;
+} 
+
+#explore table.records tr[data-editable=true] td[itemprop=Favorite] span:hover 
+{
+  color: goldenrod;
+  background: #fcd209;
+}
+
+#explore table.records tr[data-editable=true].active td[itemprop=Favorite] span:hover, 
+#explore table.records tr[data-editable=true].active td[itemprop=Favorite] label input:checked + span:hover 
+{
+  color: #0072a2 !important;
+  background: #fcd209;
+  cursor: pointer;
+}
+
+#explore table.records tr[data-editable=true] td[itemprop=Favorite] span:active, 
+#explore table.records tr[data-editable=true].active td[itemprop=Favorite] span:hover 
+{
+  color: #fcd209 !important;
+  background: goldenrod;
+}
+
+#explore table.records.rowVolume-0 th[data-item=Favorite] > span,
+#explore table.records.rowVolume-0 td[itemprop=Favorite] > label
+{
+  display: none;
+}
+
+
+/* PEEK (eye) */
+
+#explore table.records.rowVolume-0 td[itemprop=Favorite] i.fa-eye
+{
+  color: rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  padding: 3px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  font-size: larger;
+}
+
+#explore table.records:not(.rowVolume-0) td[itemprop=Favorite] i.fa-eye
+{
+  display: none;
+}
+
+#explore table.records.rowVolume-0 tr.peek td[itemprop=Favorite] i.fa-eye
+{
+  color: #0072a2;
+}
+
+#explore table.records.rowVolume-0 tr.active td[itemprop=Favorite] i.fa-eye
+{
+  color: rgba(255,255,255,0.2);
+}
+
+#explore table.records.rowVolume-0 tr.peek.active td[itemprop=Favorite] i.fa-eye
+{
+  color: aqua;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=Favorite] i.fa-eye:hover
+{
+  color: #0072a2 !important;
+  background: #fcd209;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=Favorite] i.fa-eye:active
+{
+  color: #fcd209 !important;
+  background: goldenrod;
+}
+
+#explore table.records.rowVolume-0 tr:not(.peek) td[itemprop=Tags] div[data-truncated=true] dl:last-of-type 
+{
+  display: none;
+}
+
+
+/* TABLE > STATE */
+
+#explore table.records td[itemprop=State]
+{
+  text-align: center;
+  white-space: normal;
+  padding: 3px;
+}
+
+#explore table.records.rowVolume-2 td[itemprop=State]
+{
+  padding: 6px;
+}
+
+#explore table.records tbody.Suites td[itemprop=State],
+#explore table.records tbody.Experiments td[itemprop=State] 
+{
+  background: rgba(165, 205, 222, 0.3);
+  color: black;
+}
+
+#explore table.records td.Validating, 
+#explore table.records td.Running 
+{
+  background: rgba(255, 165, 0, 0.4);
+  color: black;
+}
+
+#explore table.records td.Waiting
+{
+  background: rgba(100, 149, 237, 0.4);
+  color: black;
+}
+
+#explore table.records td.Succeeded 
+{
+  background: rgba(0, 255, 0, 0.2);
+  color: black;
+}
+
+#explore table.records td.Canceled,
+#explore table.records td.Canceling,
+#explore table.records td.CancelRequested 
+{
+  background-color: rgba(255, 105, 180, 0.4);
+  color: black;
+} 
+
+#explore table.records td.Provisioning,
+#explore table.records td.Commissioned,
+#explore table.records td.CommissionRequested
+{
+  background-color: rgba(32, 178, 170, 0.4);
+  color: black;
+}
+
+#explore table.records td.Created
+{
+  background-color: rgba(170, 190, 210, 0.4);
+  color: black;
+}
+
+#explore table.records td.Retry,
+#explore table.records td.Resumed,
+#explore table.records td.ResumeRequested
+{
+  background-color: rgba(0, 255, 127, 0.4);
+  color: black;
+}
+
+#explore table.records td.Failed 
+{
+  background: rgba(255, 0, 0, 0.2);
+  color: black;
+}
+
+#explore table.records tr.active td.Created                { background-color: slategray; }
+#explore table.records tr.active td.CommissionRequested    { background-color: lightseagreen; }
+#explore table.records tr.active td.Provisioning           { background-color: lightseagreen; }
+#explore table.records tr.active td.Commissioned           { background-color: lightseagreen; }
+#explore table.records tr.active td.Validating             { background-color: orange; }
+#explore table.records tr.active td.Running                { background-color: orange; }
+#explore table.records tr.active td.Waiting                { background-color: cornflowerblue; }
+#explore table.records tr.active td.Retry                  { background-color: springgreen; }
+#explore table.records tr.active td.Resumed                { background-color: springgreen; }
+#explore table.records tr.active td.ResumeRequested        { background-color: springgreen; }
+#explore table.records tr.active td.Succeeded              { background-color: seagreen; }
+#explore table.records tr.active td.Failed                 { background-color: red; }
+#explore table.records tr.active td.CancelRequested        { background-color: hotpink; }
+#explore table.records tr.active td.Canceling              { background-color: hotpink; }
+#explore table.records tr.active td.Canceled               { background-color: hotpink; }
+
+#explore table.records td[itemprop=State] > div > span 
+{
+  display: inline-block;
+  margin: 0 0.5em 0.5em 0.5em;
+  font-size: smaller;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+#explore table.records tr.active td[itemprop=State] div > span 
+{
+  color: white;
+}
+
+#explore table.records tr td[itemprop=State] div > div
+{
+  z-index: 1; /*  on small displays, this thwarts occlusion by adjacent datetime links */
+}
+
+#explore table.records.rowVolume-2 td[itemprop=State] > div > div 
+{
+  width: auto;
+  margin: 4px auto;
+  padding: 0;
+  display: -ms-flexbox;
+  -ms-box-orient: vertical;
+  -ms-flex-direction: column;
+  -ms-flex-wrap: nowrap;
+  -ms-justify-content: flex-start;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  border: 1px solid transparent;
+}
+
+#explore table.records:not(.rowVolume-2) td[itemprop=State] div > div 
+{
+  width: auto;
+  margin: 4px;
+  -ms-box-orient: horizontal;
+  -ms-flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -ms-justify-content: flex-start;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=State] div > div
+{
+  margin: 0;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=State] div
+{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=State] > div > div 
+{
+  -moz-order: 1;
+  -ms-order: 1;
+  -o-order: 1;
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=State] > div > span
+{
+  -moz-order: 0;
+  -ms-order: 0;
+  -o-order: 0;
+  -webkit-box-ordinal-group: 1;
+  -ms-flex-order: 0;
+  order: 0;
+}
+
+#explore table.records td[itemprop=State] button 
+{
+  display: inline-block;
+  width: auto;
+  min-width: 22px;
+  height: 1.2rem;
+  margin: 1px 0 0 0;
+  padding: 6px;
+  box-sizing: content-box;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  -webkit-box-flex: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+}
+
+#explore table.records td[itemprop=State] button > i.fa:not(.fa-play) 
+{
+  font-size: larger;
+}
+
+#explore table.records td[itemprop=State] button > i.fa.fa-play 
+{
+  font-size: smaller;
+}
+
+#explore table.records tbody.Experiments td[itemprop=State] button.Chartable,
+#explore table.records tbody.Suites td[itemprop=State] button.Chartable,
+#explore table.records tbody.Experiments td[itemprop=State] button.Accessible,
+#explore table.records tbody.Suites td[itemprop=State] button.Accessible
+{
+  display: none; 
+}
+
+#explore table.records td[itemprop=State] button.Chartable,
+#explore table.records td[itemprop=State] button.Startable, 
+#explore table.records td[itemprop=State] button.Stoppable, 
+#explore table.records td[itemprop=State] button.Deletable, 
+#explore table.records td[itemprop=State] button.Accessible
+{
+	border: 1px solid transparent;
+  color: rgba(0, 0, 0, 0.6);
+	fill: rgba(0, 0, 0, 0.6);
+}
+
+#explore table.records td[itemprop=State] button:not(:first-of-type) 
+{
+  border-top-color: rgba(0, 0, 0, 0.2);
+  border-left-color: transparent;
+}
+
+#explore table.records:not(.rowVolume-2) td[itemprop=State] button:not(:first-of-type) 
+{
+  border-top-color: transparent;
+  border-left-color: rgba(0, 0, 0, 0.2);
+}
+
+#explore table.records td[itemprop=State] button[disabled]:not(:first-of-type) 
+{
+  border-top-color: rgba(0, 0, 0, 0.7);
+  border-left-color: transparent;
+}
+
+#explore table.records:not(.rowVolume-2) td[itemprop=State] button[disabled]:not(:first-of-type) 
+{
+  border-top-color: transparent;
+  border-left-color: rgba(0, 0, 0, 0.7);
+}
+
+#explore table.records tr.active td[itemprop=State] button.Chartable,
+#explore table.records tr.active td[itemprop=State] button.Startable,
+#explore table.records tr.active td[itemprop=State] button.Stoppable,
+#explore table.records tr.active td[itemprop=State] button.Deletable, 
+#explore table.records tr.active td[itemprop=State] button.Accessible 
+{
+  background: linear-gradient(to bottom, #ffffff 0%, #ddddcc 100%);
+  color: rgba(0, 0, 0, 0.8);
+	fill: rgba(0, 0, 0, 0.8);
+}
+
+#explore table.records tr td[itemprop=State] button.Chartable:hover 
+{
+  color: #00b3ff;
+	fill: #00b3ff;
+}
+
+#explore table.records tr td[itemprop=State] button.Startable:hover 
+{
+  color: #00aa00;
+	fill: #00aa00;
+}
+
+#explore table.records tr td[itemprop=State] button.Stoppable:hover
+{
+  color: hotpink;
+	fill: hotpink;
+}
+
+#explore table.records tr td[itemprop=State] button.Deletable:hover
+{
+  color: #e00;
+	fill: #e00;
+}
+
+#explore table.records tr td[itemprop=State] button.Accessible:hover
+{
+  color: #00b3ff;
+	fill: #00b3ff;
+}
+
+#explore table.records tr td[itemprop=State] button.Chartable:hover,
+#explore table.records tr td[itemprop=State] button.Startable:hover,
+#explore table.records tr td[itemprop=State] button.Stoppable:hover,
+#explore table.records tr td[itemprop=State] button.Deletable:hover, 
+#explore table.records tr td[itemprop=State] button.Accessible:hover
+{
+  background: linear-gradient(to bottom, #ffffff 0%, #ddddcc 100%);
+  border-color: black;
+}
+
+#explore table.records tr.active td[itemprop=State] > div > div
+{
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+#explore table.records tr[data-editable=true].active td[itemprop=State] > div > div
+{
+  border-color: rgba(0, 0, 0, 0.7);
+}
+
+#explore table.records tr.active td[itemprop=State] button
+{
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+#explore table.records tr.active td[itemprop=State] button:hover
+{
+  border-color: white;
+}
+
+#explore table.records tr td[itemprop=State] button.Chartable:active,
+#explore table.records tr td[itemprop=State] button.Startable:active, 
+#explore table.records tr td[itemprop=State] button.Stoppable:active, 
+#explore table.records tr td[itemprop=State] button.Deletable:active, 
+#explore table.records tr td[itemprop=State] button.Accessible:active
+{
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to top, #ffffff 0%, #ddddcc 100%);
+  border-color: black;
+  color: black;
+	fill: black;
+}
+
+#explore table.records td[itemprop=State] button[disabled] 
+{
+  opacity: 0.3;
+	color: #888 !important;
+	fill: #888 !important;
+  cursor: default;
+}
+
+/* TABLE > MULTI-SELECT */
+
+#explore table.records:not(.related)
+th[data-item=Selection]:hover
+{
+	background: #fcd209;
+	cursor: pointer;
+}
+
+#explore table.records 
+th[data-item=Selection] input[type=checkbox] 
+{
+	vertical-align: middle;
+  cursor: pointer;
+}
+
+#explore table.records 
+td[itemprop=Selection] input[disabled], 
+#explore table.records 
+tr[data-editable=false] td[itemprop=Selection] input
+{
+	visibility: hidden;
+  cursor: default;
+}
+
+#explore table.records.Simulations 
+tr td[itemprop=Selection] input[type=checkbox] 
+{
+	visibility: visible;
+  cursor: pointer;
+}
+
+#explore table.records.Simulations 
+tr td[itemprop=Selection]
+{
+  cursor: pointer;
+}
+
+#explore table.records.multi-active 
+tr[data-editable=true] td[itemprop=Selection],
+#explore table.records.multi-active.Simulations 
+tr td[itemprop=Selection] 
+{
+	background: rgba(170, 190, 210, 0.4);
+}
+
+#explore table.records.multi-actives 
+tr.active td[itemprop=Selection] 
+{
+  background: aqua !important;
+	border-left: 1px dotted #0072a2;
+}
+
+#explore table.records.multi-active 
+tr[data-editable=true] td[itemprop=Selection]:hover,
+#explore table.records.multi-active.Simulations 
+tr td[itemprop=Selection]:hover
+{
+	background: #fcd209;
+}
+
+#explore table.records.multi-active 
+tr.active td[itemprop=Selection]:hover 
+{
+	background: aquamarine;
+}
+
+#explore table.records th[data-item=Selection]:active,
+#explore table.records.multi-active 
+tr td[itemprop=Selection]:active 
+{
+	
+	background: #004766 !important;
+}
+
+#explore table.records.multi-actives tr.active td[itemprop=State] div button.Startable:not([disabled]),
+#explore table.records.multi-actives tr.active td[itemprop=State] div button.Stoppable:not([disabled]),
+#explore table.records.multi-actives tr.active td[itemprop=State] div button.Deletable:not([disabled])
+{
+  background: aqua -webkit-linear-gradient(bottom, lightseagreen, aqua) !important;
+  background: aqua linear-gradient(to top, lightseagreen, aqua) !important;
+	color: black !important;
+	border-color: lightseagreen !important;
+  cursor: pointer;
+}
+
+#explore table.records.multi-actives tr.active td[itemprop=State] div button.Startable:not([disabled]):hover,
+#explore table.records.multi-actives tr.active td[itemprop=State] div button.Stoppable:not([disabled]):hover,
+#explore table.records.multi-actives tr.active td[itemprop=State] div button.Deletable:not([disabled]):hover
+{
+	border-color: white !important;
+}
+
+#explore table.records.multi-actives tr.active td[itemprop=State] div button.Startable:not([disabled]):active,
+#explore table.records.multi-actives tr.active td[itemprop=State] div button.Stoppable:not([disabled]):active,
+#explore table.records.multi-actives tr.active td[itemprop=State] div button.Deletable:not([disabled]):active
+{
+  background: aqua -webkit-linear-gradient(bottom, aqua, lightseagreen) !important;
+  background: aqua linear-gradient(to top, aqua, lightseagreen) !important;
+	color: black !important;
+	border-color: black !important;
+}
+
+/* TABLE > STATE (cont) */
+
+#explore table.records tbody.Simulations tr td[itemprop=State].Created div button.Stoppable,
+#explore table.records tbody.Simulations tr td[itemprop=State]:not(.Created) div button.Startable 
+{
+  display: none;
+}
+
+@media all and (max-width: 936px)
+{
+  #explore table.records.rowVolume-1 td[itemprop=State] div 
+  {
+    width: 34px;
+    margin: 4px auto;
+    padding: 0;
+    display: -ms-flexbox;
+    -ms-box-orient: vertical;
+    -ms-flex-direction: column;
+    -ms-flex-wrap: nowrap;
+    -ms-justify-content: flex-start;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    border: 1px solid transparent;
+  }
+
+  #explore table.records.rowVolume-1 td[itemprop=State] div button:not(:first-of-type) 
+  {
+    border-top-color: rgba(0, 0, 0, 0.2);
+    border-left-color: transparent;
+  }
+
+  #explore table.records.rowVolume-1 td[itemprop=State] div button[disabled]:not(:first-of-type) 
+  {
+    border-top-color: rgba(0, 0, 0, 0.7);
+    border-left-color: transparent;
+  }
+}
+
+/* TABLE > DELETED */
+
+#explore table.records tr.deleted,
+#explore table.records tr.deleted:hover
+{
+  background-color: red !important;
+  color: darkred !important;
+  cursor: default;
+}
+
+#explore table.records tr.deleted td 
+{
+  border-right: 1px dotted darkred;
+}
+
+#explore table.records tr.deleted a,
+#explore table.records tr.deleted a:hover,
+#explore table.records tr.deleted a var,
+#explore table.records tr.deleted a var:hover,
+#explore table.records tr.deleted dt,
+#explore table.records tr.deleted dt:hover,
+#explore table.records tr.deleted dd,
+#explore table.records tr.deleted dd:hover,
+#explore table.records tr.deleted td span,
+#explore table.records tr.deleted td span + time, 
+#explore table.records tr.deleted dl.tag:hover
+{
+  background: none !important;
+  color: darkred !important;
+  cursor: default;
+}
+
+#explore table.records tr.deleted td[itemprop=Related] a span
+{
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+#explore table.records tr.deleted input, 
+#explore table.records tr.deleted button
+{
+  visibility: hidden;
+}
+
+#explore table.records.rowVolume-1 tr.deleted 
+td[itemprop=Tags]:hover > div 
+{
+  overflow-y: hidden;
+}
+
+/* TABLE of MEASURES */ 
+
+#explore .workspace-grid div.measures 
+{
+  padding: 5px;
+  margin-top: 5px;
+}
+
+#explore .workspace-grid.chart div.measures 
+{
+  display: none; 
+} 
+
+#explore table.states-chart 
+{
+  background-color: orange;
+  width: 100%;
+  margin: 0;
+}
+
+#explore table.states-chart tbody tr td 
+{
+  width: 1%;
+  height: 2em;
+  line-height: 2;
+  vertical-align: top;
+  white-space: nowrap;
+  text-indent: 0.5em;
+  border-right: 1px solid white;
+  transition-property: width, height;
+  transition-duration: 1s, 200ms;
+  transition-timing-function: ease;
+  cursor: pointer;
+}
+
+#explore table.states-chart tbody tr td a 
+{
+  color: white;
+  text-decoration: none;
+}
+
+#explore table.states-chart tbody tr td dt 
+{
+  margin: 0;
+  padding: 0;
+  padding-right: 0.5em;
+}
+
+#explore table.states-chart tbody tr td dd 
+{
+  height: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 2em;
+  line-height: 0.7;
+  opacity: 0;
+  transition-property: height, opacity;
+  transition-duration: 300ms, 700ms;
+  transition-timing-function: ease;
+}
+
+#explore table.states-chart tbody tr td,
+#explore table.states-chart tbody tr:hover td  
+{
+/* :hover only when collapsible */
+  height: 4em;
+}
+
+#explore table.states-chart tbody tr td dd,
+#explore table.states-chart tbody tr:hover td dd 
+{
+/* :hover only when collapsible */
+  height: 1em;
+  opacity: 1;
+}
+
+#explore table.states-chart tbody tr td.default 
+{
+  display: none;
+  border: none;
+  margin-left: -2px;
+}
+
+#explore table.states-chart tbody tr td.default dl 
+{
+  margin: 0 -2px;
+}
+
+#explore table.states-chart.process tbody tr td.default 
+{
+  display: inline;
+}
+
+#explore table.states-chart tbody tr td.Created
+{
+  background-color: slategray;
+}
+
+#explore table.states-chart tbody tr td.CommissionRequested,
+#explore table.states-chart tbody tr td.Provisioning,
+#explore table.states-chart tbody tr td.Commissioned
+{
+  background-color: lightseagreen;
+}
+
+#explore table.states-chart tbody tr td.Running
+{
+/* sees through to .grid table.states-chart */
+/* background-color: orange; */
+  background-color: transparent;
+}
+
+#explore table.states-chart tbody tr td.Waiting
+{
+  background-color: cornflowerblue;
+}
+
+#explore table.states-chart tbody tr td.Retry,
+#explore table.states-chart tbody tr td.ResumeRequested,
+#explore table.states-chart tbody tr td.Resumed
+{
+  background-color: springgreen;
+}
+
+#explore table.states-chart tbody tr td.Succeeded
+{
+  background-color: seagreen;
+}
+
+#explore table.states-chart tbody tr td.Failed
+{
+  background-color: red;
+}
+
+#explore table.states-chart tbody tr td.CancelRequested,
+#explore table.states-chart tbody tr td.Canceling,
+#explore table.states-chart tbody tr td.Canceled 
+{
+  background-color: hotpink;
+}
+
+#explore table.states-chart tbody tr td:hover 
+{
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%);
+  color: black;
+}
+
+#explore table.states-chart tbody tr td:active 
+{
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+  color: white;
+}
+
+/* ASSET COLLECTIONS */
+
+/* the Id field should be hidden unless for asset collection grid */
+#explore table.records dd[itemprop='Id'] 
+{
+  display:none
+}
+
+#explore table.records tbody.AssetCollections dd[itemprop='Id'] 
+{
+   display: block;
+}
+
+#explore table.records tbody.AssetCollections 
+th.date 
+{
+	width: 12%;
+} 
+
+#explore table.records tbody.AssetCollections.rowVolume-1 
+td[itemprop=Tags] > div 
+{
+	min-height: 1em;
+}
+
+/* HIERARCHICAL VIEW (related=true) */
+
+#explore table.records.related tbody[data-tier=general] {
+  border: 4px solid #005d85;
+}
+
+#explore table.records.related tbody[data-tier=precede] tr,
+#explore table.records.related tbody[data-tier=descent] tr {
+  background-color: unset;
+}
+
+#explore table.records.related tbody[data-tier=precede] tr:nth-last-child(odd) {
+  background-color: rgba(120, 110, 100, 0.1); /* #f4f4f0 */
+}
+
+#explore table.records.related tbody[data-tier=descent] tr:nth-child(even) {
+  background-color: rgba(120, 110, 100, 0.1); /* #f4f4f0 */
+}
+
+#explore table.records tbody[data-tier=precede],
+#explore table.records tbody[data-tier=descent],
+#explore table.records tbody[data-tier=precede] .loaded,
+#explore table.records tbody[data-tier=descent] .loaded,
+#explore table.records tbody[data-tier=precede].done .loading,
+#explore table.records tbody[data-tier=descent].done .loading,
+#explore table.records.related tbody[data-tier=general] a[rel=usage] {
+  display: none;
+}
+
+#explore table.records.related tbody[data-tier=precede],
+#explore table.records.related tbody[data-tier=descent] {
+  display: table-row-group;
+}
+
+#explore table.records tbody[data-tier=precede].done .loaded,
+#explore table.records tbody[data-tier=descent].done .loaded {
+  display: inline;
+}
+
+#explore table.records.related a[disabled],
+#explore table.records.related a[disabled] > * {
+  cursor: default !important;  
+}
+
+#explore table.records.related a[rel=relationship] span,
+#explore table.records.related tr.active a[rel=relationship] span {
+  background: #005d85;
+  color: aqua;
+}
+
+#explore table.records blockquote {
+  margin: 1em 1.9em;
+  font-size: smaller;
+}
+
+/* ROW-VOLUME OVERRIDES */
+
+#explore table.records.rowVolume-0 td
+{
+  padding: 0 6px;
+}
+
+#explore table.records.rowVolume-0 td,
+#explore table.records.rowVolume-0 td[itemprop=State] div > span
+{
+  font-size: unset;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+#explore table.records.rowVolume-0 tr.peek td,
+#explore table.records.rowVolume-0 tr.peek td[itemprop=State] div > span
+{
+  vertical-align: top;
+  padding-top: 4px;
+}
+
+#explore table.records.rowVolume-0 tr td[itemprop=State] > div
+{
+  margin-right: -4px;
+}
+
+#explore table.records.rowVolume-0 tr td[itemprop=State] > div > div 
+{
+  margin: 0 -1px -2px -2px;
+}
+
+#explore table.records.rowVolume-0 td[itemprop=State] button
+{
+  padding: 5px;
+}
+
+/* AVATARS PLACEMENTS */
+
+#explore table.records .avatar {
+  display: none;
+}
+
+#explore table.records.related .avatar {
+  display: inline-block;
+}
+
+#explore table.records .avatar
+{
+  display: inline-block;
+  float: left;
+  margin-right: 0.3em;
+}
+
+#explore fieldset.entity menu .avatar
+{
+  display: inline-block;
+  width: 1.8rem;
+  vertical-align: middle;
+  margin-bottom: -6px;
+}
+
+
+/* temporarily disable multi-select of related items */
+/* ALSO: #explore table.records:not(.related) th[data-item=Selection]:hover */
+#explore table.records.related th[data-item=Selection] input[type=checkbox],
+#explore table.records.related td[itemprop=Selection] input[type=checkbox] {
+  visibility: hidden;
+}
+
+@media only screen and (max-width: 813px) { 
+  
+  body {
+    zoom: 0.9; 
+  }
+
+  #header menu.local .exploreModeRadioControl {
+    margin: -7px 1em;
+    white-space: nowrap;
+  }
+
+  #explore .resizer {
+    left: 100% !important;
+    margin-left: -30px !important;
+  }
+
+  #explore table.records.rowVolume-1 td[itemprop=State] div {
+    width: auto;
+  }
+
+  #explore .workspace .split .wrap {
+    flex-direction: column;
+  }
+
+  #explore .workspace-detail,
+  #explore .workspace-exhibit {
+    width: 100% !important;
+  }
+  
+  #explore .workspace-exhibit article {
+    border-top: 3px solid #0072a2;
+  }
+  
+  #explore .workspace-detail div.tabContent {
+    width: 100vw;
+  }
+
+  #explore .workspace-grid.chart .multichart {
+    width: auto;
+  }
+
+  div.multichart > .mcControls {
+    width: -moz-fit-content;
+    width: 100vw;
+    height: auto;
+    flex-direction: column;
+  }
+  div.multichart > .mcControls .action button {
+    width: 100%;
+  }
+
+  #footer {
+    border: none;
+  }
+
+}

@@ -1,0 +1,863 @@
+﻿@charset "UTF-8";
+
+/*
+ * (c) 2016 Intellectual Ventures
+ * Module: Explore
+ *
+ * @version 2.0.0 2016/06/09
+ * @requires normalize.css (or equivalent)
+ *
+ */
+
+body.explore #content section#explore {
+  display: block;
+}
+.workspace-exhibit .pill,
+.workspace-detail .pill{
+  display: inline-block;
+  border-radius: 1em;
+  padding: 6px 18px;
+  margin: 0 0 10px 4px;
+  text-align: center;
+  line-height: 1.2em;
+  background: #A5CDDE linear-gradient(to top, #A5CDDE, #e6eff5);
+  color: #456;
+  cursor: pointer;
+	font-size: smaller;
+	text-decoration: none;
+}
+.workspace-exhibit .pill:hover,
+.workspace-detail .pill:hover
+{
+  background: #fcd209;
+  color: black;
+}
+.workspace-exhibit .pill:active,
+.workspace-detail .pill:active
+{
+  background: #fea004;
+  color: white;
+}
+.workspace-exhibit .pill.disabled,
+.workspace-detail .pill.disabled
+{
+  background: #eaeaea;
+  color: lightgrey;
+  pointer-events: none;
+}
+
+/* ========================================================================== */
+/* Detail */
+/* ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/* Detail controls
+/* -------------------------------------------------------------------------- */
+.workspace-detail .truss {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.workspace-detail .scroller {
+  overflow-y: scroll;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.workspace-detail .detailsControls {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+  width: 100%;
+  background-color: #f4f4f0;
+  min-height: 35px;
+  border-bottom: 1px solid #0072a1 !important;
+  white-space: nowrap;
+}
+.workspace-detail .detailsControls.process {
+  background-color: #aed882;
+}
+.workspace-detail .detailsControls span.avatar {
+  display: inline-block;
+  width: 3rem;
+  margin: -1px -4px 0 0;
+  padding: 4px 0 0 0;
+  line-height: 21px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #005d84;
+}
+.workspace-detail .detailsControls span.message {
+  line-height: 34px;
+  margin-left: 3rem;
+}
+.workspace-detail .detailsControls .rule {
+  height: 3px;
+  width: 100%;
+  background-color: #0072a1;
+}
+.workspace-detail ul.detailTabs {
+  display: inline-block;
+  margin-right: 16px;
+}
+.workspace-detail ul.detailTabs > li {
+  background-color: #005d84;
+  color: #87CEFA;
+  padding: 8px 14px;
+}
+.workspace-detail button {
+  display: inline-block;
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+  border: 1px solid #C0C0C0;
+  text-align: center;
+  line-height: 1em;
+  color: #0072a2;
+  min-height: 32px;
+  padding: 0 15px 0 15px;
+  margin-right: 15px;
+}
+.workspace-detail button:hover:not([disabled]),
+.workspace-detail button.detailButton:hover:not([disabled])
+{
+  background: #eee;
+}
+.workspace-detail button.detailButton[disabled],
+.workspace-detail button.detailButton[disabled]:hover
+{
+  background: #ddd;
+	color: #82A4B5;
+}
+.workspace-detail button.detailButton:focus {
+  outline: 1px dotted #c0c0c0;
+}
+.workspace-detail button.detailButton.save {
+	display: inline-block;
+  position: absolute;
+	top: 0;
+  right: 30px;
+	height: 35px;
+  margin: 0;
+  padding: 0 1.5em;
+  border: none;
+}
+.workspace-detail button.detailButton.save:active {
+	background-color: #002B3D;
+	color: white;
+}
+@keyframes blinkDetail {
+  0%, 100% { background-color: rgba(0, 0, 0, 0); }
+  50% { background-color: #00b3ff;color: white; }
+}
+@-webkit-keyframes blinkDetail {
+  0%, 100% { background-color: rgba(0, 0, 0, 0); }
+  50% { background-color: #00b3ff;color: white; }
+}
+.workspace-detail button.detailButton.blink:not(:active) {
+    -moz-animation-name: blinkDetail;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: ease-in-out;
+    -moz-animation-duration: 1s;
+    -webkit-animation-name: blinkDetail;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-name: blinkDetail;
+            animation-name: blinkDetail;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+}
+.workspace-detail button.go,
+.workspace-detail button.copy {
+  margin: 0 0 0 8px;
+  background-color: white;
+  max-height: 32px;
+  min-height: 32px;
+}
+.workspace-detail button.go:focus,
+.workspace-detail button.copy:focus {
+  outline: 1px dotted #c0c0c0;
+}
+.workspace-detail button.copy.confirm {
+  color: green;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Detail tab contents
+/* -------------------------------------------------------------------------- */
+.workspace-detail article {
+  padding: 8px 16px 0 16px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.workspace-detail div.tabContent {
+  display: none;
+}
+.workspace-detail article.filesTab div.filesTab,
+.workspace-detail article.outputTab div.outputTab,
+.workspace-detail article.metaTab div.metaTab
+{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+  height: inherit;
+}
+.workspace-detail article.metaTab,
+.workspace-detail article.filesTab,
+.workspace-detail article.outputTab
+{
+  height: 100%;
+}
+.workspace-detail article.configTab div.configTab,
+.workspace-detail article.jobTab div.jobTab,
+.workspace-detail article.spatialTab div.spatialTab
+{
+  display: block;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Detail forms
+/* -------------------------------------------------------------------------- */
+.workspace-detail .form {
+  padding-bottom: 20px;
+}
+.workspace-detail .form input[type=text][readonly],
+.workspace-detail .form input[type=number][readonly]
+{
+  background: #ededed;
+  color: #0072a2;
+}
+.workspace-detail .form .formRow {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 10px;
+  min-height: 31px;
+}
+.workspace-detail .form .formRow .formRow {
+  margin-top: 0;
+}
+.workspace-detail .form select {
+  min-height: 32px;
+}
+.workspace-detail .form .formRow.stacked {
+  display: block;
+}
+.workspace-detail .form .formLabel {
+  width: 100px;
+  min-width: 100px;
+  padding-right: 10px;
+  text-align: right;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-size: smaller;
+	color: #5e8ba1;
+}
+.workspace-detail .form .formLabel.stacked {
+  display: block;
+  width: auto;
+  min-width: 0;
+  white-space: nowrap;
+  text-align: left;
+  margin-bottom: 2px;
+	font-size: smaller;
+	color: #5e8ba1;
+}
+.workspace-detail .form .formLabel.tagLabel {
+  -webkit-align-self: flex-start;
+      -ms-flex-item-align: start;
+          align-self: flex-start;
+  padding-top: 9px;
+}
+.workspace-detail .form .formField {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+          flex: 1;
+}
+.workspace-detail .form .formField.stacked {
+  box-sizing: border-box;
+  width: 100%;
+}
+.workspace-detail .form input[type=text].invalid {
+  color: #FF4500 !important;
+  border-color: #FF4500 !important;
+}
+.workspace-detail .form input[type=text].mono {
+  font-size: 15px;
+  line-height: 20px;
+}
+.workspace-detail .form .formRow .tags {
+  width: 100%;
+  min-height: 146px;
+  height: 100%;
+}
+.workspace-detail .form .formRule {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+  height: 1px;
+  background: #888;
+  margin: 10px 0 10px 0;
+}
+
+/* Per-tab specializations */
+
+/* -------------------------------------------------------------------------- */
+/* Meta tab */
+/* -------------------------------------------------------------------------- */
+.workspace-detail .form.metaTab .formRow[data-part=Truncated] {
+  margin-top: 6px;
+}
+.workspace-detail .form.metaTab .truncated {
+  width: 100%;
+}
+.workspace-detail .form.metaTab span.truncMessage {
+  line-height: 2.5em;
+}
+.workspace-detail .form.metaTab button.editTags {
+  float: right;
+  margin: 4px 0 0 0;
+}
+.workspace-detail .form.metaTab .progressBar {
+  background-color: #aed882;
+  height: 16px;
+  margin-top: 10px;
+}
+.workspace-detail .form.metaTab .formRow[data-part=Tags] {
+  flex: 1;
+  align-items: flex-start;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Config tab */
+/* -------------------------------------------------------------------------- */
+.workspace-detail .form.configTab .formRow[data-row=JobConfig],
+.workspace-detail .form.configTab .formRow[data-row=Controls]
+{
+  display: block;
+}
+
+.workspace-detail .form.configTab .formRow .multiple:not(:last-of-type) input {
+  width: calc(100% - 8px);
+}
+
+.workspace-detail .form.configTab .formRow .multiple select {
+  margin-right: 8px;
+}
+
+.workspace-detail .form.configTab a.reset {
+  float: right;
+}
+.workspace-detail .form.configTab .hflex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+.workspace-detail .form.configTab .hflex input {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+          flex: 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Files tab, Output tab */
+/* -------------------------------------------------------------------------- */
+.workspace-detail .form.filesTab .selectList,
+.workspace-detail .form.outputTab .selectList
+{
+  min-height: 300px;
+  margin: 10px 0 10px 0;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.workspace-detail .form.filesTab button.filesDownloadZip,
+.workspace-detail .form.outputTab button.outputDownloadZip
+{
+  float: right;
+  margin: 0;
+}
+.workspace-detail .form.filesTab button.filesDownloadZip[disabled],
+.workspace-detail .form.filesTab button.filesDownloadZip[disabled]:hover,
+.workspace-detail .form.outputTab button.outputDownloadZip[disabled],
+.workspace-detail .form.outputTab button.outputDownloadZip[disabled]:hover
+{
+  background: #ddd;
+  color: #82A4B5;
+}
+.workspace-detail .form.filesTab span.filesSummary,
+.workspace-detail .form.outputTab span.outputSummary {
+  line-height: 31px;
+}
+.workspace-detail .form.filesTab span.filesSummary span.oversize,
+.workspace-detail .form.outputTab span.outputSummary span.oversize {
+  color: red;
+}
+.workspace-detail .form.outputTab div.message {
+  color: darkorange;
+  padding-bottom: 4px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Job tab */
+/* -------------------------------------------------------------------------- */
+.workspace-detail .form.jobTab select {
+  width: 100%;
+}
+.workspace-detail .form.jobTab textarea {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  color: #c00;
+}
+.workspace-detail .form.jobTab .formLabel.errorLabel {
+  align-self: flex-start;
+  padding-top: 5px;
+  color: #c00;
+}
+.workspace-detail .form.jobTab .false {
+  display: none;
+}
+.workspace-detail .form.jobTab .true {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 10px;
+  min-height: 31px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Output tab */
+/* -------------------------------------------------------------------------- */
+.workspace-detail .form.outputTab .formRow[data-part=Job] {
+  margin-bottom: 8px;
+}
+.workspace-detail .form.outputTab .formRow[data-part=Job] .formLabel {
+  width: 40px;
+  min-width: 40px;
+}
+.workspace-detail .form.outputTab select {
+  width: 100%;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Spatial tab */
+/* -------------------------------------------------------------------------- */
+.workspace-detail .form.spatialTab .spatialTop
+ {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  margin-top: 10px;
+}
+.workspace-detail .form.spatialTab .spatialBottom
+{
+  margin-top: 20px;
+}
+.workspace-detail .form.spatialTab .spatialBottom .errorMessage
+{
+  color: #c00;
+}
+.workspace-detail .form.spatialTab .spatialDescription { flex: 1; }
+.workspace-detail .form.spatialTab .spatialControls {
+  width: 40%;
+  min-width: 190px;
+  min-height: 160px;
+  border-left: 1px solid #888;
+  margin-left: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+.workspace-detail .form.spatialTab .spatialControls button[disabled] {
+  color: lightgray;
+  background: #eeeeee;
+}
+.workspace-detail .form.spatialTab .spatialMessage {
+  margin: 0;
+  color: inherit;
+  font-weight: normal;
+}
+.workspace-detail .form.spatialTab .spatialMessage.preprocessed {
+  color: darkgreen;
+  font-weight: bold;
+}
+.workspace-detail .form.spatialTab .spatialMessage.preprocessing {
+  color: goldenrod;
+  font-weight: bold;
+}
+.workspace-detail .form.spatialTab .spatialMessage.needsPreprocessing {
+  color: #cc0000;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.workspace-detail .form.spatialTab a.spatialChooseScript.pill {
+  margin: 0;
+  padding: 3px 9px;
+}
+.workspace-detail .form.spatialTab span.spatialScriptName {
+  margin-right: 8px;
+  max-width: 100px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: middle;
+}
+.workspace-detail .form.spatialTab button.spatialPreprocess {
+  margin-top: 12px;
+}
+.workspace-detail .form.spatialTab button.spatialRepreprocess {
+  margin-top: 12px;
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+}
+.workspace-detail .form.spatialTab .spatialSummary {
+  list-style-type: disc;
+  margin-left: 10px;
+}
+.workspace-detail .form.spatialTab select.spatialRuns,
+.workspace-detail .form.spatialTab select.spatialRuns > option
+{
+  font-family: "Roboto Condensed", sans-serif;
+}
+.workspace-detail .form.spatialTab select.spatialRuns {
+  margin-bottom: 8px;
+  max-width: 100%;
+}
+
+/* ========================================================================== */
+/* Exhibit */
+/* ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/* Exhibit controls
+/* -------------------------------------------------------------------------- */
+.workspace-exhibit .truss {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.workspace-exhibit .exhibitControls {
+  background-color: #f4f4f0;
+	border-bottom: 1px solid #0072a2;
+  min-height: 36px;
+  width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+  padding-left: 18px;
+}
+.workspace-exhibit .exhibitControls.process {
+  background-color: #aed882;
+}
+.workspace-exhibit .rule {
+  height: 1px;
+  width: 100%;
+  background-color: #0072a1;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Exhibit content
+/* -------------------------------------------------------------------------- */
+.workspace-exhibit article {
+  overflow: auto;
+}
+.workspace-exhibit div.exhibitContent {
+  display: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.workspace-exhibit article.contentExhibit div.contentExhibit
+{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+.workspace-exhibit article.emptyExhibit div.emptyExhibit,
+.workspace-exhibit article.statsExhibit div.statsExhibit,
+.workspace-exhibit article.messageExhibit div.messageExhibit
+{
+  display: block;
+}
+
+/* Per-exhibit specializations */
+
+/* -------------------------------------------------------------------------- */
+/* Content exhibit */
+/* -------------------------------------------------------------------------- */
+.workspace-exhibit article.contentExhibit {
+  overflow: hidden;
+}
+.workspace-exhibit .exhibitContent.contentExhibit {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.workspace-exhibit .contentExhibitControls {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
+.workspace-exhibit .exhibitContent.contentExhibit .content {
+  width: 100%;
+  height: 100%;
+  margin-top: 35px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  overflow: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Stats exhibit */
+/* -------------------------------------------------------------------------- */
+.workspace-exhibit .exhibitContent.statsExhibit .mainContent {
+  padding: 16px 16px 0 16px;
+  display: block;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.workspace-exhibit .exhibitContent.statsExhibit div.state {
+  display: inline-block;
+  margin: 7px 0 0 16px;
+  text-align: center;
+}
+.workspace-exhibit .exhibitContent.statsExhibit span.state:before {
+  content: ": ";
+  color: black;
+}
+.workspace-exhibit .exhibitContent.statsExhibit .graph {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+  max-height: 250px;
+  margin: 0 16px 0 16px;
+}
+.workspace-exhibit .exhibitContent.statsExhibit .grids {
+  width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+  max-height: 250px;
+  padding: 0 16px 16px 16px;
+}
+.workspace-exhibit .exhibitContent.statsExhibit .grids .ancestor {
+  margin-bottom: 16px;
+}
+.workspace-exhibit .exhibitContent .errors {
+  margin-bottom: 20px;
+  display: none;
+}
+.workspace-exhibit .exhibitContent .errorMessage {
+  color: #c00;
+}
+/*
+  These are all the states (for simulations and work items combined).
+  These colors generally match those of Dashboard, but I have added shades
+  for some states that are lumped together by Dashboard.
+		Canceled
+		Canceling
+		CancelRequested
+		Commissioned
+		CommissionRequested
+		Created
+		Failed
+		Provisioning
+		Resumed
+		ResumeRequested
+		Retry
+		Running
+		Succeeded
+		Validating
+		Waiting
+*/
+.workspace-detail .Cancelled,
+.workspace-exhibit .exhibitContent.statsExhibit span.Canceled {
+  color: hotpink;
+}
+.workspace-detail .Canceling,
+.workspace-exhibit .exhibitContent.statsExhibit span.Canceling {
+  color: #a54a70;
+}
+.workspace-detail .CancelRequested,
+.workspace-exhibit .exhibitContent.statsExhibit span.CancelRequested {
+  color: #642a46;
+}
+.workspace-detail .Commissioned,
+.workspace-exhibit .exhibitContent.statsExhibit span.Commissioned {
+  color: lightseagreen;
+}
+.workspace-detail .CommissionRequested,
+.workspace-exhibit .exhibitContent.statsExhibit span.CommissionRequested {
+  color: #1d726a;
+}
+.workspace-detail .Created,
+.workspace-exhibit .exhibitContent.statsExhibit span.Created {
+  color: slategray;
+}
+.workspace-detail .Failed,
+.workspace-exhibit .exhibitContent.statsExhibit span.Failed {
+  color: red;
+}
+.workspace-detail .Provisioning,
+.workspace-exhibit .exhibitContent.statsExhibit span.Provisioning {
+  color: #105654;
+}
+.workspace-detail .Resumed,
+.workspace-exhibit .exhibitContent.statsExhibit span.Resumed {
+  color: #59751c;
+}
+.workspace-detail .ResumeRequested,
+.workspace-exhibit .exhibitContent.statsExhibit span.ResumeRequested {
+  color: #719726;
+}
+.workspace-detail .Retry,
+.workspace-exhibit .exhibitContent.statsExhibit span.Retry {
+  color: yellowgreen;
+}
+.workspace-detail .Running,
+.workspace-exhibit .exhibitContent.statsExhibit span.Running {
+  color: orange;
+}
+.workspace-detail .Succeeded,
+.workspace-detail .Finished,
+.workspace-exhibit .exhibitContent.statsExhibit span.Succeeded {
+  color: seagreen;
+}
+.workspace-detail .Validating,
+.workspace-exhibit .exhibitContent.statsExhibit span.Validating {
+  color: #8e5b00;
+}
+.workspace-detail .Waiting,
+.workspace-exhibit .exhibitContent.statsExhibit span.Waiting {
+  color: cornflowerblue;
+}
+
+/* ========================================================================== */
+/* Message exhibit */
+/* ========================================================================== */
+.workspace-exhibit article.messageExhibit div.messageExhibit {
+  display: block;
+  overflow: hidden;
+}
+.workspace-exhibit article.messageExhibit .message
+{
+  padding: 7px;
+}
+
+/* ========================================================================== */
+/* MULTICHART */
+/* ========================================================================== */
+
+#header menu.local .exploreModeRadioControl
+{
+  display: inline-block;
+  margin: -7px 1.5em;
+}
+#explore .workspace-grid.chart .truss {
+  height: 95%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+  overflow: hidden;
+}
+#explore .workspace-grid.list .multichart,
+#explore .workspace-grid.chart .grid
+{
+  display: none;
+}
+#explore .workspace-grid.chart .multichart,
+#explore .workspace-grid.list .grid
+{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 90%;
+}
+#explore .workspace-grid .multichart {
+  min-height: 200px;
+  margin: 10px 5px 2em 5px;
+  padding-bottom: 4px;
+  border-bottom: 1px dotted orangered;
+  background: white;
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}

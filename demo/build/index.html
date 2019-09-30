@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,user-scalable=yes">
+  <title>Filtering: Demonstration</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/normalize.css?v=8.0.1">
+  <link rel="stylesheet" href="fa/css/all.css">
+  <link rel="stylesheet" href="css/idm-font.css">
+  <link rel="stylesheet" href="css/idm-global.css">
+  <link rel="stylesheet" href="css/idm-core.css">
+  <link rel="stylesheet" href="css/idm-explore-core.css">
+  <link rel="stylesheet" href="css/idm-explore-detail.css">
+  <link rel="stylesheet" href="css/pageControl.css">
+  <script src="bundle.js"></script>
+  <style>
+
+  </style>
+</head>
+<body class="explore fullview">
+  <main role="main" id="main">
+    <header id="header">
+      <aside class="truss"></aside>
+      <div>
+        <nav class="primary">
+          <menu class="local"></menu>
+          <menu class="global unselectable">
+            <li>
+              <a href="#void" class="ignore nav-log" data-method="comps.notifier.print" title="notifications">
+                <ins><i class="material-icons">priority_high</i></ins><b class="caret">&#9660;</b>
+              </a>
+            </li>
+            <li>
+              <a href="#void" class="nav-account" title="account">
+                <ins><i class="material-icons">person</i></ins><b class="caret">&#9660;</b>
+              </a>
+              <menu class="dropdown possessor">
+                <ul class="center force-right">
+                  <li><a data-action="session">Sign Out</a></li>
+                </ul>
+              </menu>
+            </li>
+          </menu>
+        </nav>
+        <nav class="secondary">
+          <menu><!-- expando items --></menu>
+          <button class="closer" title="close">&#10005;</button>
+        </nav>
+      </div>
+      <div id="minmax" class="omni ignore" title="show/hide toolbar"><span><!--&#9715;--></span></div>
+      <div id="tribar" class="omni" tabindex="0"><i class="material-icons">menu</i></div>
+    </header>
+    <article>
+      <div id="wrap">
+        <div id="content">
+          <section id="explore">
+            <div class="wrap">
+              <div class="workspace wide-first docked">
+                <aside class="workspace-grid list" style="height: 96%;">
+                  <div class="truss">
+                    <div class="query">
+                      <div>
+                        <form class="clause" spellcheck="false" novalidate="">
+                          <fieldset class="control hidden ignore">
+                            <input type="submit" class="btn primary" value="GET">
+                            <input type="reset" class="btn danger" value="RESET">
+                          </fieldset>
+                          <fieldset class="entity">
+                            <button class="btn hilight" title="modify this expression"><dfn>Simulations</dfn><small>▼</small></button>
+                            <menu class="dropdown left">
+                              <ul>
+                                <li class="active">
+                                  <a href="#void" data-type="entity" data-value="Simulations">
+                                    <mark class="avatar icon-Simulations">
+                                      <svg width="22" height="22">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Simulations"></use>
+                                      </svg>
+                                    </mark>
+                                    <span>Simulations</span>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#void" data-type="entity" data-value="Experiments">
+                                    <mark class="avatar icon-Experiments">
+                                      <svg width="22" height="22">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Experiments"></use>
+                                      </svg>
+                                    </mark>
+                                    <span>Experiments</span>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#void" data-type="entity" data-value="Suites">
+                                    <mark class="avatar icon-Suites">
+                                      <svg width="22" height="22">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Suites"></use>
+                                      </svg>
+                                    </mark>
+                                    <span>Suites</span>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#void" data-type="entity" data-value="WorkItems">
+                                    <mark class="avatar icon-WorkItems">
+                                      <svg width="22" height="22">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_WorkItems"></use>
+                                      </svg>
+                                    </mark>
+                                    <span>Work Items</span>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="#void" data-type="entity" data-value="AssetCollections">
+                                    <mark class="avatar icon-AssetCollections">
+                                      <svg width="22" height="22">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_AssetCollections"></use>
+                                      </svg>
+                                    </mark>
+                                    <span>Asset Collections</span>
+                                  </a>
+                                </li>
+                              </ul>
+                            </menu>
+                          </fieldset>
+                          <div class="template filter-select" hidden="">
+                            <!-- primary-select -->
+                            <fieldset class="filters narrow penultimate" data-type="select">
+                              <button class="btn hilight" title="add a new expression to query"><small>▼</small></button>
+                              <menu class="dropdown left">
+                                <ul>
+                                  <li itemscope="" itemref="filters" hidden=""><a href="#void" tabindex="0" data-action="create" data-value="{{ name }}">{{ html:read }}</a></li>
+                                </ul>
+                              </menu>
+                            </fieldset>
+                          </div>
+                          <div class="template filter-options" hidden="">
+                            <!-- complex-select-option -->
+                            <fieldset class="filter options" data-type="{{ type }}" data-parameter="{{ name }}" data-operator="{{ operator }}" data-value="{{ value }}" data-comparator="{{ comparator }}">
+                              <button class="btn hilight" title="modify this expression"><dfn>{{ read }}</dfn><kbd class="mono">{{ operator }}</kbd><var>{{ value }}</var><small>▼</small></button>
+                              <menu class="dropdown left">
+                                <ul>
+                                  <li itemscope="" itemref="operation" hidden=""><a href="#void" data-action="operation" data-value="{{ name }}" data-info="{{ info }}">{{ html:read }}</a></li>
+                                </ul>
+                              </menu>
+                              <menu class="secondary dropdown left">
+                                <ul>
+                                  <li itemscope="" itemref="option" hidden=""><a href="#void" data-action="option" data-value="{{ name }}" title="{{ title }}">{{ html:read }}</a></li>
+                                </ul>
+                              </menu>
+                            </fieldset>
+                          </div>
+                          <div class="template filter-text" hidden="">
+                            <!-- simple-text-input -->
+                            <fieldset class="filter text" data-type="{{ type }}" data-parameter="{{ name }}" data-operator="{{ operator }}" data-value="{{ value }}" data-comparator="{{ comparator }}">
+                              <button class="btn hilight" title="modify this expression"><dfn>{{ read }}</dfn><kbd class="mono">{{ operator }}</kbd><var>{{ truncateIfGUID:value }}</var><small>▼</small></button>
+                              <input type="text" value="" data-value="{{ value }}" name="value" placeholder="value" pattern="{{ pattern }}" title="{{ title }}" required=""><input type="button" value="DONE" class="btn go">
+                              <menu class="dropdown left">
+                                <ul>
+                                  <li itemscope="" itemref="operation" class="{{ class }}" hidden=""><a href="#void" data-action="operation" data-value="{{ name }}" data-info="{{ info }}">{{ html:read }}</a></li>
+                                </ul>
+                              </menu>
+                            </fieldset>
+                          </div>
+                          <div class="template filter-object" hidden="">
+                            <!-- complex-text-input -->
+                            <fieldset class="filter object" data-type="{{ type }}" data-parameter="{{ name }}" data-key="{{ key }}" data-operator="{{ operator }}" data-value="{{ value }}" data-comparator="{{ comparator }}">
+                              <button class="btn hilight" title="modify this expression">
+                                <dfn>{{ read }}</dfn><var>{{ key }}</var><kbd class="mono">{{ operator }}</kbd><var>{{ value }}</var><small>▼</small>
+                              </button>
+                              <input type="text" value="" data-value="{{ key }}" name="key" placeholder="key" pattern="{{ pattern }}" title="{{ title }}" required="">
+                              <ins>
+                                <button class="ternary btn hilight"><kbd class="mono">{{ operator }}</kbd></button>
+                                <menu class="dropdown">
+                                  <ul class="mono center">
+                                    <li itemscope="" itemref="option" hidden=""><a href="#void" data-action="operator" data-value="{{ name }}" title="{{ read }}">{{ text }}</a></li>
+                                  </ul>
+                                </menu>
+                              </ins>
+                              <span class="range">
+                          <ins class="btn hilight small-caps">range</ins>
+                          <input type="text" value="" data-value="" name="floor" placeholder="low" pattern="[-+]?[0-9]*[.,]?[0-9]+" title="valid numbers are required for a range">
+                          <ins class="btn hilight small-caps">thru</ins>
+                          <input type="text" value="" data-value="" name="ceiling" placeholder="high" pattern="[-+]?[0-9]*[.,]?[0-9]+" title="valid numbers are required for a range">
+                        </span>
+                              <input type="text" value="" data-value="{{ value }}" name="value" placeholder="value" pattern="{{ pattern }}" title="{{ title }}"><input type="button" value="DONE" class="btn go">
+                              <menu class="dropdown left">
+                                <ul>
+                                  <li itemscope="" itemref="operation" hidden=""><a href="#void" data-action="operation" data-value="{{ name }}" data-info="{{ info }}">{{ html:read }}</a></li>
+                                </ul>
+                              </menu>
+                            </fieldset>
+                          </div>
+                          <fieldset class="filters narrow penultimate" data-type="select">
+                            <button class="btn hilight" title="add a new expression to query"><small>▼</small></button>
+                            <menu class="dropdown left">
+                              <ul>
+                                <li itemscope="" itemref="filters" hidden=""><a href="#void" tabindex="0" data-action="create" data-value="{{ name }}">{{ html:read }}</a></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="Id">Id</a></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="Tag">Tag</a></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="SimulationState">State</a></li>
+                                <li class="spacer"></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="Owner">Owner</a></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="GroupName">Group</a></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="EnvironmentName">Environment</a></li>
+                                <li class="spacer"></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="Name">Name</a></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="Description">Description</a></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="DateCreated">Created</a></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="LastModified">Modified</a></li>
+                                <li><a href="#void" tabindex="0" data-action="create" data-value="ExperimentId">Experiment Id</a></li>
+                              </ul>
+                            </menu>
+                          </fieldset>
+                          <fieldset class="filter options" data-type="owner" data-parameter="Owner" data-operator="=" data-value="psylwester" data-comparator="Owner=">
+                            <button class="btn hilight" title="modify this expression"><dfn>Owner</dfn><kbd class="mono">=</kbd><var>psylwester</var><small>▼</small></button>
+                            <menu class="dropdown left">
+                              <ul>
+                                <li itemscope="" itemref="operation" hidden=""><a href="#void" data-action="operation" data-value="{{ name }}" data-info="{{ info }}">{{ html:read }}</a></li>
+                                <li><a href="#void" data-action="operation" data-value="equal" data-info="">Is Equal To…</a></li>
+                                <li><a href="#void" data-action="operation" data-value="notEqual" data-info="">Is Not Equal To…</a></li>
+                                <li class="spacer"></li>
+                                <li><a href="#void" data-action="operation" data-value="shortcut" data-info="Owner=psylwester">= ME</a></li>
+                                <li class="spacer"></li>
+                                <li class="hot"><a href="#void" data-action="operation" data-value="remove" data-info="">Remove</a></li>
+                              </ul>
+                            </menu>
+                            <menu class="secondary dropdown left">
+                              <ul>
+                                <li itemscope="" itemref="option" hidden=""><a href="#void" data-action="option" data-value="{{ name }}" title="{{ title }}">{{ html:read }}</a></li>
+                                <li><a href="#void" data-action="option" data-value="psylwester" title="Peter Sylwester">ME</a></li>
+                              </ul>
+                            </menu>
+                          </fieldset>
+                          <fieldset class="ultimate">
+                            <button name="reduce" class="reduce fadein" title="reduce filtering"><i class="material-icons">clear</i></button>
+                            <button name="refresh" class="refresh fadein" title="re-apply these filters"><i class="material-icons">refresh</i></button>
+                          </fieldset>
+                          <fieldset class="anchor">
+                            <div class="rowVolumeOption">
+                              <label title="adjust the row height">row&nbsp;↕</label>
+                              <label class="btn checked" title="minimal row height">
+                                <dfn>min</dfn>
+                                <input type="radio" name="rowVolumeOption" value="0" tabindex="-1">
+                              </label>
+                              <label class="btn selected" title="medium row height">
+                                <dfn>med</dfn>
+                                <input type="radio" name="rowVolumeOption" value="1" tabindex="-1">
+                              </label>
+                              <label class="btn" title="maximum row height">
+                                <dfn>max</dfn>
+                                <input type="radio" name="rowVolumeOption" value="2" tabindex="-1">
+                              </label>
+                            </div>
+                            <div class="pagerBox">
+                              <div class="pager pageControl" style="">
+                                <button class="pager pageFirst" tabindex="0" title="Go to first page">
+                                  <i class="fa fa-step-backward"></i>
+                                </button>
+                                <button class="pager pageBackward" tabindex="0">
+                                  <i class="fa fa-play fa-flip-horizontal"></i>
+                                </button>
+                                <input class="currentPage" tabindex="0" type="text" value="" title="Page number" style="width: 2.3em;">
+                                <fieldset class="pages">
+                                  <button class="pager pageSize" tabindex="0" title="46 total items. Click to set items per page.">
+                                    <span class="rangeText"> of 46</span> <small>▼</small>
+                                  </button>
+                                  <menu class="dropdown center">
+                                    <ul>
+                                      <li><span class="small-caps">Per page</span></li>
+                                      <li data-value="10" class="active"><a href="#void">10</a></li>
+                                      <li data-value="20"><a href="#void">20</a></li>
+                                      <li data-value="30"><a href="#void">30</a></li>
+                                      <li data-value="50"><a href="#void">50</a></li>
+                                      <li data-value="80"><a href="#void">80</a></li>
+                                      <li data-value="custom"><a href="#void"> <input class="customCount" type="text" value="5" pattern="^[1-9][0-9]?$|^100$" required="" title="an integer between 1 and 100" maxlength="3"> </a></li>
+                                    </ul>
+                                  </menu>
+                                </fieldset>
+                                <button class="pager pageForward" tabindex="0" title="Go forward one page">
+                                  <i class="fa fa-play"></i>
+                                </button>
+                                <button class="pager pageLast" tabindex="0" title="Go to last page">
+                                  <i class="fa fa-step-forward"></i>
+                                </button>
+                              </div>
+                              <span class="count" style="display: none;"></span>
+                            </div>
+                          </fieldset>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="multichart">
+                    </div>
+                    <div class="measures ignore"></div>
+                    <div class="grid">
+                      <table class="records Simulations rowVolume-0">
+                        <thead>
+                        <tr>
+                          <th data-item="Selection" title="cycle multiple selections"><input type="checkbox"></th>
+                          <th data-item="Owner" class="sortable" title="who created the item"><span>Owner</span></th>
+                          <th data-item="Meta" title="the essential info">Meta</th>
+                          <th data-item="Favorite" title="add/remove filter to items tagged as Favorite"><span>★</span></th>
+                          <th data-item="Tags" title="complex data stored in the item"><span>Tags</span></th>
+                          <th data-item="Related" title="links to associated items">Related </th>
+                          <th data-item="State" title="state of item and actions available">Activity</th>
+                          <th data-item="DateCreated" class="date sortable sorting desc" title="newest item at top">Created</th>
+                          <th data-item="LastModified" class="date sortable" title="last time item was changed">Modified</th>
+                        </tr>
+                        </thead>
+                        <tbody class="entity-list" data-tier="precede">
+                        <tr class="message">
+                          <td colspan="9">
+                            <blockquote><span class="loading">Looking for ancestors...</span><span class="loaded">No ancestors found.</span></blockquote>
+                          </td>
+                        </tr>
+                        </tbody>
+                        <tbody class="entity-list" data-tier="general">
+                        <tr itemscope="" itemref="Entity" itemid="{{ Id }}" data-editable="{{ IsEditable }}" data-entity="{{ Entity }}" hidden="">
+                          <td itemprop="Selection"><input type="checkbox"></td>
+                          <td itemprop="Owner" title="{{ Owner }}">
+                            <span>{{ Owner }}</span>
+                          </td>
+                          <td itemprop="Meta">
+                            <ins class="{{ combineString:('avatar ', 'icon-', Entity) }}"><svg width="22" height="22">{{ html:Icon }}</svg></ins>
+                            <dl>
+                              <dt itemprop="Name">
+                                <a data-id="{{ Id }}" href="{{ combineString:('/#explore/', Entity ,'?filters=Id=', Id, '&amp;offset=0') }}" title="{{ Name }}">{{ Name|Id }}</a>
+                              </dt>
+                              <dd itemprop="Description">{{ Description }}</dd>
+                              <dd itemprop="Worker" class="{{ exists:Worker }}">
+                                <span>Worker:</span>
+                                <span>{{ Worker.Name }}</span>
+                                <span>{{ Worker.Version }}</span>
+                              </dd>
+                              <dd itemprop="Id">
+                                <span>Id:</span>
+                                <span>{{ Id }}</span>
+                              </dd>
+                            </dl>
+                          </td>
+                          <td itemprop="Favorite">
+                            <label title="toggle this as a Favorite">
+                              <input type="checkbox" checked="{{ boolean:isFavorite }}"><span>★</span>
+                            </label>
+                            <i class="fa fa-eye peeker" aria-hidden="true" title="toggle taller row"></i>
+                          </td>
+                          <td itemprop="Tags">
+                            <div data-truncated="{{ exists:TagsTruncated }}">
+                              <dl class="tag" itemscope="" itemref="{{ forin:TagsTruncated|Tags }}" hidden="">
+                                <dt>{{ KEY }}</dt>
+                                <dd title="{{ VALUE }}" itemprop="{{ KEY }}">{{ VALUE }}</dd>
+                                <dd></dd>
+                              </dl>
+                            </div>
+                          </td>
+                          <td itemprop="Related" data-reference="{{ ExperimentId|SuiteId|Id }}">
+                            <div>
+                              <a class="{{ exists:Relationship }}" href="#void" rel="relationship" title="how this item is related" disabled=""><span>{{ Relationship }}</span></a>
+                              <a class="{{ exists:Worker }}" href="#void" rel="usage" title="go to usages of this item"><span>Usage</span></a>
+                              <a class="{{ exists:ExperimentId|SuiteId }}" href="#void" rel="parent" title="go to the parent of this item"><span>Parent</span></a>
+                              <a class="{{ exists:ExperimentId }}" href="#void" rel="siblings" title="go to items of the same parent"><span>Siblings</span></a>
+                              <a class="{{ absent:ExperimentId }}" href="#void" rel="children" title="go to descendants of this item">
+                                <var>{{ Stats.SimulationCount }}</var>
+                                <var>{{ Stats.ExperimentCount }}</var>
+                              </a>
+                            </div>
+                          </td>
+                          <td itemprop="State" class="{{ State|SimulationState }}" data-state="{{ State|SimulationState }}">
+                            <div>
+                              <div>
+                                <button class="Deletable" title="Delete" aria-label="Delete" disabled=""><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                <button class="Accessible ignore" title="Access" aria-label="Access" disabled=""><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>
+                                <button class="Stoppable ignore" title="Cancel" aria-label="Cancel" disabled=""><i class="fa fa-hand-paper-o" aria-hidden="true"></i></button>
+                                <button class="Startable ignore" title="Start" aria-label="Start" disabled=""><i class="fa fa-play" aria-hidden="true"></i></button>
+                                <button class="Chartable ignore" title="Chart" aria-label="Chart" disabled=""><i class="fa fa-line-chart" aria-hidden="true"></i></button>
+                              </div>
+                              <span class="{{ exists:State|SimulationState }}">{{ breakCamelCase:State|SimulationState }}</span>
+                            </div>
+                          </td>
+                          <td class="date" itemprop="DateCreated" data-value="{{ DateCreated }}" title="{{ DateCreated }}">
+                            <span>{{ DateCreatedLocalSplit.0 }}</span>
+                            <time datetime="{{ DateCreated }}">{{ DateCreatedLocalSplit.1 }}</time>
+                          </td>
+                          <td class="date" itemprop="LastModified" data-value="{{ LastModified }}" title="{{ LastModified }}">
+                            <span>{{ LastModifiedLocalSplit.0 }}</span>
+                            <time datetime="{{ LastModified }}">{{ LastModifiedLocalSplit.1 }}</time>
+                          </td>
+                        </tr>
+                        <tr itemid="0935385f-1b70-e811-a2c0-c4346bcb7275" data-editable="true" data-entity="Simulations">
+                          <td itemprop="Selection"><input type="checkbox"></td>
+                          <td itemprop="Owner" title="psylwester">
+                            <span>psylwester</span>
+                          </td>
+                          <td itemprop="Meta">
+                            <ins class="avatar icon-Simulations"><svg width="22" height="22">
+                              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Simulations"></use>
+                            </svg></ins>
+                            <dl>
+                              <dt itemprop="Name">
+                                <a data-id="0935385f-1b70-e811-a2c0-c4346bcb7275" href="/#explore/Simulations?filters=Id=0935385f-1b70-e811-a2c0-c4346bcb7275&amp;offset=0" title="Vector Garki Sweep">Vector Garki Sweep</a>
+                              </dt>
+                              <dd itemprop="Description">Larval Habitat x EIR</dd>
+                              <dd itemprop="Worker" class="false">
+                                <span>Worker:</span>
+                                <span></span>
+                                <span></span>
+                              </dd>
+                              <dd itemprop="Id">
+                                <span>Id:</span>
+                                <span>0935385f-1b70-e811-a2c0-c4346bcb7275</span>
+                              </dd>
+                            </dl>
+                          </td>
+                          <td itemprop="Favorite">
+                            <label title="toggle this as a Favorite">
+                              <input type="checkbox"><span>★</span>
+                            </label>
+                            <i class="fa fa-eye peeker" aria-hidden="true" title="toggle taller row"></i>
+                          </td>
+                          <td itemprop="Tags">
+                            <div data-truncated="false">
+                              <dl class="tag" itemscope="" itemref="{{ forin:TagsTruncated|Tags }}" hidden="">
+                                <dt>{{ KEY }}</dt>
+                                <dd title="{{ VALUE }}" itemprop="{{ KEY }}">{{ VALUE }}</dd>
+                                <dd></dd>
+                              </dl>
+                              <dl class="tag">
+                                <dt>Demo</dt>
+                                <dd title="" itemprop="Demo"></dd>
+                                <dd></dd>
+                              </dl>
+                              <dl class="tag">
+                                <dt>DTKVersion</dt>
+                                <dd title="2.13.0" itemprop="DTKVersion">2.13.0</dd>
+                                <dd></dd>
+                              </dl>
+                              <dl class="tag">
+                                <dt>EIR_Level</dt>
+                                <dd title="HIGH" itemprop="EIR_Level">HIGH</dd>
+                                <dd></dd>
+                              </dl>
+                              <dl class="tag">
+                                <dt>Replicate</dt>
+                                <dd title="5" itemprop="Replicate">5</dd>
+                                <dd></dd>
+                              </dl>
+                              <dl class="tag">
+                                <dt>Reserve</dt>
+                                <dd title="0" itemprop="Reserve">0</dd>
+                                <dd></dd>
+                              </dl>
+                              <dl class="tag">
+                                <dt>Run_Number</dt>
+                                <dd title="5" itemprop="Run_Number">5</dd>
+                                <dd></dd>
+                              </dl>
+                              <dl class="tag">
+                                <dt>TestPointIndex</dt>
+                                <dd title="4" itemprop="TestPointIndex">4</dd>
+                                <dd></dd>
+                              </dl>
+                              <dl class="tag">
+                                <dt>x_Temporary_Larval_Habitat</dt>
+                                <dd title="1.5" itemprop="x_Temporary_Larval_Habitat">1.5</dd>
+                                <dd></dd>
+                              </dl>
+                            </div>
+                          </td>
+                          <td itemprop="Related" data-reference="ae34385f-1b70-e811-a2c0-c4346bcb7275">
+                            <div>
+                              <a class="false" href="#void" rel="relationship" title="how this item is related" disabled=""><span></span></a>
+                              <a class="false" href="#void" rel="usage" title="go to usages of this item"><span>Usage</span></a>
+                              <a class="true" href="/#explore/Experiments?filters=Id=ae34385f-1b70-e811-a2c0-c4346bcb7275&amp;offset=0" rel="parent" title="go to the parent of this item"><span>Parent</span></a>
+                              <a class="true" href="/#explore/Simulations?filters=ExperimentId=ae34385f-1b70-e811-a2c0-c4346bcb7275&amp;offset=0" rel="siblings" title="go to items of the same parent"><span>Siblings</span></a>
+                              <a class="false" href="#void" rel="children" title="go to descendants of this item">
+                                <var></var>
+                                <var></var>
+                              </a>
+                            </div>
+                          </td>
+                          <td itemprop="State" class="Succeeded Deletable" data-state="Succeeded">
+                            <div>
+                              <div>
+                                <button class="Deletable" title="Delete..." aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                <button class="Accessible" title="Get Working Directory" aria-label="Access"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>
+                                <button class="Stoppable ignore" title="Cancel" aria-label="Cancel" disabled=""><i class="fa fa-hand-paper-o" aria-hidden="true"></i></button>
+                                <button class="Startable ignore" title="Start" aria-label="Start" disabled=""><i class="fa fa-play" aria-hidden="true"></i></button>
+                                <button class="Chartable" title="Chart Output Channels" aria-label="Chart"><i class="fa fa-line-chart" aria-hidden="true"></i></button>
+                              </div>
+                              <span class="true">Succeeded</span>
+                            </div>
+                          </td>
+                          <td class="date" itemprop="DateCreated" data-value="2018-06-14T21:39:19.0600000Z" title="2018-06-14T21:39:19.0600000Z">
+                            <span>6/14/2018</span>
+                            <time datetime="2018-06-14T21:39:19.0600000Z">2:39:19 PM</time>
+                          </td>
+                          <td class="date" itemprop="LastModified" data-value="2018-06-14T21:39:19.0600000Z" title="2018-06-14T21:39:19.0600000Z">
+                            <span>6/14/2018</span>
+                            <time datetime="2018-06-14T21:39:19.0600000Z">2:39:19 PM</time>
+                          </td>
+                        </tr>
+                        </tbody>
+                        <tbody class="entity-list" data-tier="descent">
+                        <tr class="message">
+                          <td colspan="9">
+                            <blockquote><span class="loading">Looking for related items...</span><span class="loaded">No related items found.</span></blockquote>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </aside>
+                <div class="split" style="height: 38px;">
+                  <div class="wrap">
+                    <aside class="workspace-detail" style="width: 50%;">
+                      <div class="truss">
+                        <div class="detailsControls">
+                          <span class="avatar" style="display: none;"></span>
+                          <span class="message noSelection">Nothing selected.</span>
+                          <span class="message multiSelection" style="display: none;"><span class="count"></span> items selected.</span>
+                          <span class="message loading" style="display: none;">Getting details...</span>
+                          <ul class="detailTabs radioControl" style="visibility: collapse;">
+                            <li data-tab="metaTab" data-index="0">Meta</li>
+                            <li data-tab="configTab" data-index="1">Config</li>
+                            <li data-tab="filesTab" data-index="2">Files</li>
+                            <li data-tab="jobTab" data-index="3">Job</li>
+                            <li data-tab="outputTab" data-index="4" class="selected">Output</li>
+                            <li data-tab="spatialTab" data-index="5">Spatial</li>
+                          </ul>
+                          <button class="detailButton save" disabled="" style="display: none;">Save</button>
+                        </div>
+                        <div class="scroller">
+                          <article class="outputTab" style="display: none;">
+                            <!-- Meta tab ------------------------------------------------------------->
+                            <div class="tabContent metaTab form">
+                              <div hidden="" itemscope="">
+                                <div class="formRow" data-part="Id">
+                                  <label class="formLabel">Id:</label>
+                                  <input type="text" class="formField mono" value="{{ Id }}" pattern="[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}" itemprop="Id" spellcheck="false" title="Id in valid 8-4-4-4-12 format">
+                                  <button class="copy" title="Copy Id to clipboard"><i class="fa fa-clipboard"></i></button>
+                                </div>
+                                <div class="formRow parent" data-part="ExperimentId">
+                                  <label class="formLabel">Experiment Id:</label>
+                                  <input type="text" class="formField mono" value="{{ ExperimentId }}" pattern="^$|[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}" title="Experiment Id in valid 8-4-4-4-12 format" itemprop="ExperimentId"
+                                         spellcheck="false" data-validate="true">
+                                  <button class="copy" title="Copy Experiment Id to clipboard"><i class="fa fa-clipboard"></i></button>
+                                </div>
+                                <div class="formRow" data-part="SuiteId">
+                                  <label class="formLabel">Suite Id:</label>
+                                  <input type="text" class="formField mono" value="{{ SuiteId }}" pattern="^$|[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}" title="Suite Id in valid 8-4-4-4-12 format" itemprop="SuiteId" spellcheck="false"
+                                         data-validate="true">
+                                  <button class="copy" title="Copy Suite Id to clipboard"><i class="fa fa-clipboard"></i></button>
+                                </div>
+                                <div class="formRow" data-part="Name">
+                                  <label class="formLabel">Name:</label>
+                                  <input type="text" class="formField" pattern="[^&quot;]*" value="{{ Name }}" title="Name - any characters except double-quote (&quot;) allowed" itemprop="Name" data-disallowkeycodes="222" data-validate="true">
+                                </div>
+                                <div class="formRow" data-part="Description">
+                                  <label class="formLabel">Description:</label>
+                                  <input type="text" class="formField" pattern="[^&quot;]*" value="{{ Description }}" title="Description - any characters except double-quote (&quot;) allowed" itemprop="Description" data-disallowkeycodes="222"
+                                         data-validate="true">
+                                </div>
+                                <div class="formRow" data-part="Tags">
+                                  <label class="formLabel tagLabel">Tags:</label>
+                                  <ul class="tags" itemprop="Tags"></ul>
+                                  <div class="truncated">
+                                    <span class="truncMessage"></span><button class="editTags">Edit Tags</button>
+                                  </div>
+                                  <div class="progressBar"></div>
+                                </div>
+                              </div> <!-- meta template -->
+                            </div>
+
+                            <!-- Config tab ----------------------------------------------------------->
+                            <div class="tabContent configTab form">
+                              <div hidden="" itemscope="">
+                                <div data-part="SimExpSteConfig">
+                                  <div class="formRow stacked" data-part="Job">
+                                    <label class="formLabel stacked">Job:</label>
+                                    <select class="JobConfig formField stacked">
+                                      <option value="0">Input configuration</option>
+                                    </select>
+                                  </div>
+                                  <div class="formRow stacked" data-part="AssetCollectionId">
+                                    <label class="formLabel stacked">Asset Collection Id:</label>
+                                    <div class="formRow">
+                                      <input type="text" class="formField disabled" itemprop="AssetCollectionId" title="Asset Collection Id" value="{{ AssetCollectionId }}">
+                                      <button class="copy" title="Copy asset collection ID to clipboard"><i class="fa fa-clipboard"></i></button>
+                                    </div>
+                                  </div>
+                                  <div class="formRow stacked" data-part="WorkingDirectoryRoot">
+                                    <label class="formLabel stacked">Working directory root:</label>
+                                    <div class="formRow">
+                                      <input type="text" class="formField" itemprop="WorkingDirectoryRoot" spellcheck="false" title="Working directory" pattern="[^<>\?\*|]*" value="{{ WorkingDirectoryRoot }}" data-disallowkeycodes="222">
+                                      <button class="copy" title="Copy working directory root to clipboard"><i class="fa fa-clipboard"></i></button>
+                                    </div>
+                                  </div>
+                                  <div class="formRow parent stacked" data-part="SimulationInputArgs">
+                                    <label class="formLabel stacked">Simulation input arguments:</label>
+                                    <input type="text" class="formField stacked" title="Simulation command-line arguments" spellcheck="false" itemprop="SimulationInputArgs" value="{{ SimulationInputArgs }}">
+                                  </div>
+                                  <div class="formRow stacked" data-part="ExecutablePath">
+                                    <label class="formLabel stacked">Executable path:</label>
+                                    <input type="text" class="formField stacked" spellcheck="false" title="Path to specific DTK executable" pattern="[^<>\?\*|]*" itemprop="ExecutablePath" value="{{ ExecutablePath }}"></div>
+                                  <div class="formRow" data-part="Compute">
+                                    <div class="multiple">
+                                      <label class="formLabel stacked">Environment:</label>
+                                      <input type="text" class="columnField disabled" itemprop="EnvironmentName" title="Environment name" value="{{ EnvironmentName }}" readonly="">
+                                    </div>
+                                    <div class="multiple">
+                                      <label class="formLabel stacked">Priority:</label>
+                                      <select itemprop="Priority" title="Run priority">
+                                        <option value="Lowest">Lowest</option>
+                                        <option value="BelowNormal">Below Normal</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="AboveNormal">Above Normal</option>
+                                        <option value="Highest">Highest</option>
+                                      </select>
+                                    </div>
+                                    <div class="multiple">
+                                      <label class="formLabel stacked">Node group name:</label>
+                                      <input class="columnField" type="text" itemprop="NodeGroupName" title="Node Group Name" data-disallowkeycodes="222" value="{{ NodeGroupName }}">
+                                    </div>
+                                    <div class="multiple numeric">
+                                      <label class="formLabel stacked">Min cores:</label>
+                                      <input class="columnField" type="number" min="1" max="256" step="1" title="Minimum cores for run" itemprop="MinCores" value="{{ MinCores }}">
+                                    </div>
+                                    <div class="multiple numeric">
+                                      <label class="formLabel stacked">Max cores:</label>
+                                      <input class="columnField" type="number" min="1" max="256" step="1" title="Maximum cores for run" itemprop="MaxCores" value="{{ MaxCores }}">
+                                    </div>
+                                    <div class="multiple numeric">
+                                      <label class="formLabel stacked">Retries:</label>
+                                      <input class="columnField" type="number" min="0" max="10" step="1" title="Maximum retries" itemprop="MaximumNumberOfRetries" value="{{ MaximumNumberOfRetries }}">
+                                    </div>
+                                  </div>
+                                  <div class="formRow" data-part="Job.Exclusive">
+                                    <label class="clickable"><input type="checkbox" title="Exclude all other jobs" checked="{{ boolean:Exclusive }}" itemprop="Exclusive">Exclusive</label>
+                                  </div>
+                                </div>
+                                <div data-part="WorkItemConfig">
+                                  <div class="formRow" data-part="AssetCollectionId">
+                                    <label class="formLabel">Asset Collection Id:</label>
+                                    <input type="text" class="formField disabled" itemprop="AssetCollectionId" title="Asset Collection Id" value="{{ AssetCollectionId }}">
+                                    <button class="copy" title="Copy asset collection ID to clipboard">
+                                      <i class="fa fa-clipboard"></i>
+                                    </button>
+                                  </div>
+                                  <div class="formRow" data-part="WorkingDirectory">
+                                    <label class="formLabel">Working Directory:</label>
+                                    <input type="text" class="formField" itemprop="WorkingDirectory" spellcheck="false" title="Working Directory" pattern="[^<>\?\*|]*" value="{{ WorkingDirectory }}" data-disallowkeycodes="222">
+                                    <button class="copy" title="Copy working directory to clipboard">
+                                      <i class="fa fa-clipboard"></i>
+                                    </button>
+                                  </div>
+                                  <div class="formRow" data-part="WorkingDirectorySize">
+                                    <label class="formLabel">Working Directory Size:</label>
+                                    <input type="text" class="formField disabled" itemprop="WorkingDirectorySize" title="Working Directory Size" value="{{ bytesToSize:WorkingDirectorySize }}" readonly="">
+                                  </div>
+                                  <div class="formRow" data-part="WorkerName">
+                                    <label class="formLabel">Worker:</label>
+                                    <input type="text" class="formField disabled" itemprop="Worker.Name" title="Worker Name" value="{{ Worker.Name }}" readonly="">
+                                  </div>
+                                  <div class="formRow" data-part="WorkerVersion">
+                                    <label class="formLabel">Version:</label>
+                                    <input type="text" class="formField disabled" itemprop="Worker.Version" title="Worker Version" value="{{ Worker.Version }}" readonly="">
+                                  </div>
+                                  <div class="formRow" data-part="WorkerPriority">
+                                    <label class="formLabel">Priority:</label>
+                                    <input type="text" class="formField disabled" itemprop="WorkItemPriority" title="Worker Priority" value="{{ WorkItemPriority }}" readonly="">
+                                  </div>
+                                  <div class="formRow" data-part="WorkerEnvironmentName">
+                                    <label class="formLabel">Environment:</label>
+                                    <input type="text" class="formField disabled" itemprop="EnvironmentName" title="Environment Name" value="{{ EnvironmentName }}" readonly="">
+                                  </div>
+                                </div>
+                              </div> <!-- config template -->
+                              <div data-part="ConfigControls">
+                                <div class="formRule"></div>
+                                <div class="formRow stacked" data-part="Controls">
+                                  <label class="clickable configShowInherited">
+                                    <input type="checkbox" checked="" class="configShowInherited">Show inherited values</label>
+                                  <a href="#" class="reset">Reset</a>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- Files tab ------------------------------------------------------------>
+                            <div class="tabContent filesTab form">
+                              <div class="inline">
+                                <span class="filesSummary"></span>
+                                <button class="filesDownloadZip">Download Selected as ZIP</button>
+                                <iframe name="filesDownloadFrame" class="filesDownloadFrame" width="1" height="1" style="visibility:hidden;position:absolute;display:none"></iframe>
+                              </div>
+                              <div class="selectList"></div>
+                            </div>
+
+                            <!-- Job tab -------------------------------------------------------------->
+                            <div class="tabContent jobTab form">
+                              <div class="formRow" data-part="Job">
+                                <label class="formLabel">Job:</label>
+                                <select name="Job"></select>
+                              </div>
+                              <div class="jobDetails" hidden="" itemscope="">
+                                <div class="formRow" data-part="UIJob Id">
+                                  <label class="formLabel">Job Id:</label>
+                                  <input type="text" class="formField disabled" value="{{ JobId }}" spellcheck="false" readonly="">
+                                </div>
+                                <div class="formRow" data-part="WorkingDirectory">
+                                  <label class="formLabel">Directory:</label>
+                                  <input type="text" class="formField disabled" spellcheck="false" value="{{ WorkingDirectory }}" readonly="">
+                                  <button class="copy" title="Copy working directory to clipboard"><i class="fa fa-clipboard"></i></button>
+                                  <button class="go" title="Go to output directory for this job in Output tab"><i class="fa fa-arrow-right"></i></button>
+                                </div>
+                                <div class="formRow" data-part="OutputSize">
+                                  <label class="formLabel">Output size:</label>
+                                  <input type="text" class="formField disabled" value="{{ FriendlyOutputDirectorySize }}" readonly="">
+                                </div>
+                                <div class="formRow" data-part="State">
+                                  <label class="formLabel">State:</label>
+                                  <input type="text" class="formField disabled" value="{{ JobState }}" readonly="">
+                                </div>
+                                <div class="formRow" data-part="Submitted">
+                                  <label class="formLabel">Submitted:</label>
+                                  <input type="text" class="formField disabled" value="{{ FriendlySubmitTime }}" readonly="">
+                                </div>
+                                <div class="formRow" data-part="Started">
+                                  <label class="formLabel">Started:</label>
+                                  <input type="text" class="formField disabled" value="{{ FriendlyStartTime }}" readonly="">
+                                </div>
+                                <div class="formRow" data-part="Ended">
+                                  <label class="formLabel">Ended:</label>
+                                  <input type="text" class="formField disabled" value="{{ FriendlyEndTime }}" readonly="">
+                                </div>
+                                <div class="formRow" data-part="Runtime">
+                                  <label class="formLabel">Run time:</label>
+                                  <input type="text" class="formField disabled" value="{{ FriendlyRunTime }}" readonly="">
+                                </div>
+                                <div class="{{ exists:ErrorMessage }}" data-part="ErrorMessage">
+                                  <label class="formLabel errorLabel">Error:</label>
+                                  <textarea readonly="">{{ ErrorMessage }}</textarea>
+                                </div>
+                              </div> <!-- job template -->
+                            </div>
+
+                            <!-- Output tab ----------------------------------------------------------->
+                            <div class="tabContent outputTab form">
+                              <div class="formRow" data-part="Job">
+                                <label class="formLabel">Job:</label>
+                                <select name="Job" data-field="UIHPCJobs:FriendlyName"></select>
+                              </div>
+                              <div class="message"></div>
+                              <div class="inline">
+                                <slpan class="outputSummary"></slpan>
+                                <button class="outputDownloadZip">Download Selected as ZIP</button>
+                                <iframe name="outputDownloadFrame" class="outputDownloadFrame" width="1" height="1" style="visibility:hidden;position:absolute;display:none"></iframe>
+                              </div>
+                              <div class="selectList"></div>
+                            </div>
+
+                            <!-- Spatial tab ---------------------------------------------------------->
+                            <div class="tabContent spatialTab form">
+                              <div data-part="Visualization">
+                                <div class="spatialTop">
+                                  <div class="spatialDescription">
+                                    <p class="spatialMessage">Checking the simulation for spatial data...</p>
+                                    <ul class="spatialSummary"></ul>
+                                  </div>
+                                  <div class="spatialControls" style="display: none;">
+                                    <div data-part="Visualize" style="display: none;">
+                                      <label class="spatialRunsLabel">Preprocessor runs:<br></label>
+                                      <select class="spatialRuns"></select>
+                                      <a href="#" class="spatialVisualize pill">Visualize</a>
+                                      <button class="spatialRepreprocess">Re-preprocess</button>
+                                    </div>
+                                    <div data-part="Preprocess" style="display: none;">
+                                      <label>Preprocessing script:</label><br>
+                                      <label><input type="radio" name="spatialNodeRep" value="Points">New <i class="fa fa-circle"></i>&nbsp;Point script</label>
+                                      <label><input type="radio" name="spatialNodeRep" value="Shapes">New <i class="fa fa-cube"></i>&nbsp;Shape script</label><br>
+                                      <label><input type="radio" name="spatialNodeRep" value="Custom"><span class="spatialScriptName"></span><a class="spatialChooseScript pill">Custom script...</a></label>
+                                      <input type="file" accept=".py" style="display: none;">
+                                      <button class="spatialPreprocess">Preprocess</button>
+                                    </div>
+                                    <div data-part="Preprocessing" style="display: none;">
+                                      <a href="#" class="spatialWorkItem pill">Preprocessing Work Item</a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="spatialBottom"></div>
+                              </div>
+                            </div>
+                          </article>
+                        </div> <!-- scroller -->
+                      </div>
+                    </aside>
+                    <aside class="workspace-exhibit" style="width: 50%;">
+                      <div class="truss">
+                        <article class="emptyExhibit">
+                          <!-- Empty Exhibit -------------------------------------------------------->
+                          <div class="exhibitContent emptyExhibit">
+                            <div class="exhibitControls emptyExhibitControls"></div>
+                          </div>
+
+                          <!-- ContentExhibit ------------------------------------------------------->
+                          <div class="exhibitContent contentExhibit" style="width: 770px; height: 36.2813px;">
+                            <div class="exhibitControls contentExhibitControls">
+                              <div class="helper contentControlHelper">
+                                <div class="contentControlGroup search"> <input class="contentControlSearch" type="text" placeholder="search term" style="display: none;"> <button class="searchPrev" title="Find previous occurrence" style="display: none;">
+                                  <i class="fa fa-chevron-left fa-lg"></i> </button>
+                                  <div class="searchCount" style="display: none;"></div> <button class="searchNext" title="Find next occurrence" style="display: none;"> <i class="fa fa-chevron-right fa-lg"></i> </button> <button class="searchClear"
+                                                                                                                                                                                                                                     title="Clear search text" style="display: none;"> <i class="fa fa-times fa-lg"></i> </button>
+                                </div>
+                                <div class="contentControlGroup options"> <button class="theme" title="Set color theme"> <i class="fa fa-adjust fa-lg" aria-hidden="true"></i> </button> <button class="options" title="Set options"> <i class="fa fa-cog fa-lg"
+                                                                                                                                                                                                                                         aria-hidden="true"></i> </button>
+                                  <div class="contentControlMenu theme" style="display: none;">
+                                    <h4>Theme</h4>
+                                    <ul class="themes">
+                                      <li class="contentControlMenuItem" data-theme="light"><i class="fa fa-check fa-sm" style="visibility: visible;">&nbsp;</i><span>Light</span></li>
+                                      <li class="contentControlMenuItem" data-theme="dark"><i class="fa fa-check fa-sm" style="visibility: hidden;">&nbsp;</i><span>Dark</span></li>
+                                    </ul>
+                                  </div>
+                                  <div class="contentControlMenu options" style="display: none;">
+                                    <h4>Options</h4> <label data-option="formatting" style="display: none;"><input type="checkbox">Format</label> <label data-option="lineNumbers" style="display: none;"><input type="checkbox">Line numbers</label> <label
+                                      class="noOptions" style="">No options</label>
+                                  </div>
+                                </div>
+                                <div class="contentControlGroup paging" style="display: none;"> <button class="head" title="Show top of file"> <i class="fa fa-step-backward fa-lg" aria-hidden="true"></i> </button> <button class="prev"
+                                                                                                                                                                                                                              title="Show prev chunk of file"> <i class="fa fa-backward fa-lg" aria-hidden="true"></i> </button> <button class="next" title="Show next chunk of file"> <i class="fa fa-forward fa-lg" aria-hidden="true"></i> </button>
+                                  <button class="tail" title="Show end of file"> <i class="fa fa-step-forward fa-lg" aria-hidden="true"></i> </button></div>
+                                <div class="contentControlGroup output"> <button class="copy" title="Copy to clipboard" style="display: none;"> <i class="fa fa-clipboard"></i> </button> <button class="popout" title="Pop out to external window"
+                                                                                                                                                                                                  style="display: none;"> <i class="fa fa-external-link-square-alt fa-lg"></i> </button></div>
+                              </div>
+                            </div>
+                            <div class="content contentControl theme-light">
+                              <div class="titleArea">
+                                <h1></h1>
+                                <h4></h4>
+                              </div>
+                              <div class="contentArea type-none-none handler-NoContentHandler">
+                                <div class="noRender" style="width: 100%; height: 100%; padding: 3px;">No content.</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- StatsExhibit --------------------------------------------------------->
+                          <div class="exhibitContent statsExhibit">
+                            <div class="exhibitControls statsExhibitControls">
+                              <div class="state"><span class="entity"></span><span class="state"></span></div>
+                            </div>
+                            <div class="mainContent">
+                              <div class="errors" style="display: none;">
+                                Error message:
+                                <div class="errorMessage"></div>
+                              </div>
+                              <div class="interaction">
+                                <a class="pill parent" href="#" style="display: none;"></a>
+                                <a class="pill sibling" href="#" style="display: none;"></a>
+                                <a class="pill child" href="#" style="display: none;"></a>
+                              </div>
+                            </div>
+                            <div class="graph" style="display: none;"></div>
+                            <div class="grids" style="display: none;">
+                              <div class="ancestor gridControlContainer" style="display: flex; flex-direction: column; position: relative;">
+                                <div class="gridHeadScroller">
+                                  <table class="gridControlHead">
+                                    <thead>
+                                    <tr>
+                                      <th data-colindex="0" data-name="WorkItem" title="Ancestor" style="min-width: 100%; max-width: 100%; width: 100%;">Ancestor</th>
+                                      <th data-colindex="1" class="sortable" data-name="Generation" title="Sort by Generation" style="min-width: 150px; max-width: 150px; width: 150px;">Generation</th>
+                                    </tr>
+                                    </thead>
+                                  </table>
+                                </div>
+                                <div class="gridControlScroller">
+                                  <table class="gridControlGrid striped">
+                                    <thead>
+                                    <tr>
+                                      <th data-colindex="0" style="cursor: default; min-width: 100%; max-width: 100%; width: 100%;"></th>
+                                      <th data-colindex="1" style="cursor: default; min-width: 150px; max-width: 150px; width: 150px;"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="empty">
+                                      <td colspan="2" class="empty">No ancestor work items.</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="gridHeadMask" style="height: 33.3333px;"></div>
+                                <div class="gridEditMask"></div>
+                              </div>
+                              <div class="related gridControlContainer" style="display: flex; flex-direction: column; position: relative;">
+                                <div class="gridHeadScroller">
+                                  <table class="gridControlHead">
+                                    <thead>
+                                    <tr>
+                                      <th data-colindex="0" class="sortable sorting asc" data-name="Relationship" title="Sort by Relationship" style="min-width: 150px; max-width: 150px; width: 150px;">Relationship</th>
+                                      <th data-colindex="1" data-name="Related" title="Related Entity" style="min-width: 100%; max-width: 100%; width: 100%;">Related Entity</th>
+                                      <th data-colindex="2" data-name="Id" title="Id" style="min-width: 100%; max-width: 100%; width: 100%;">Id</th>
+                                    </tr>
+                                    </thead>
+                                  </table>
+                                </div>
+                                <div class="gridControlScroller">
+                                  <table class="gridControlGrid striped">
+                                    <thead>
+                                    <tr>
+                                      <th data-colindex="0" style="cursor: default; min-width: 150px; max-width: 150px; width: 150px;"></th>
+                                      <th data-colindex="1" style="cursor: default; min-width: 100%; max-width: 100%; width: 100%;"></th>
+                                      <th data-colindex="2" style="cursor: default; min-width: 100%; max-width: 100%; width: 100%;"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="empty">
+                                      <td colspan="3" class="empty">No related entities.</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="gridHeadMask" style="height: 33.3333px;"></div>
+                                <div class="gridEditMask"></div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- MessageExhibit -------------------------------------------------------->
+                          <div class="exhibitContent messageExhibit">
+                            <div class="exhibitControls messageExhibitControls"></div>
+                            <div class="message"></div>
+                          </div>
+
+                        </article>
+                      </div>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+              <div class="resizer docked" style="left: 50%; top: 96%; margin-top: -30px;">
+                <button class="freeform unselectable" title="resize"><i class="icon-grip material-icons"></i></button>
+                <button class="dock-toggle unselectable">
+                  <i class="icon-down material-icons" title="minimize details"></i>
+                </button>
+              </div>
+              <div class="z-level-holder ignore"></div>
+            </div>
+          </section>
+          <section id="fail"><p class="delayed-fadein">Something may have gone wrong. Please reload the page.</p></section>
+        </div>
+      </div>
+      <ins id="dialog"></ins>
+    </article>
+    <footer id="footer">
+      <nav>
+        <figure class="ignore" title="Global Good"></figure>
+        <cite>Copyright &copy; 2019 Intellectual Ventures Property Holdings, LLC  All rights reserved.</cite>
+        <figure class="ignore" title="Institute for Disease Modeling"></figure>
+      </nav>
+    </footer>
+    <ins id="modal"></ins>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="ignore">
+      <defs>
+        <!--USAGE:
+        <svg width="24" height="24">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon_Simulations"></use>
+        </svg>-->
+        <symbol id="icon_Simulations" viewBox="0 0 72 72">
+          <polygon points="36,0 4.8,54 36,72 67.2,54 36,0"/>
+          <polygon class="icon-fill" points="61.7,52.5 36,67.4 10.3,52.5 36,8"/>
+          <polygon class="icon-shade" points="36,67.4 10.3,52.5 36,8"/>
+        </symbol>
+        <symbol id="icon_Experiments" viewBox="0 0 72 72">
+          <polygon points="36,0 4.8,18 4.8,54 36,72 67.2,54 67.2,18 36,0"/>
+          <polygon class="icon-fill" points="63.2,20.3 63.2,51.7 36,67.4 8.8,51.7 8.8,20.3 36,4.6"/>
+          <polygon class="icon-shade" points="8.8,20.3 8.8,51.7 36,67.4 36,36"/>
+        </symbol>
+        <symbol id="icon_Suites" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="33"/>
+          <circle class="icon-shade" cx="36" cy="36" r="29"/>
+          <circle class="icon-fill" cx="40" cy="32" r="22"/>
+        </symbol>
+        <symbol id="icon_WorkItems" viewBox="0 0 72 72">
+          <path d="M66,70H18V14h32c8.8,0,16,7.2,16,16V70z"/>
+          <path class="icon-shade" d="M62,66H22V18h28c6.6,0,12,5.4,12,12V66z"/>
+          <path d="M6,2h48v56H22c-8.8,0-16-7.2-16-16V2z"/>
+          <path class="icon-fill" d="M10,6h40v48H22c-6.6,0-12-5.4-12-12V6z"/>
+          <rect x="20" y="16" width="20" height="3"/>
+          <rect x="20" y="27" width="20" height="3"/>
+          <rect x="20" y="38" width="20" height="3"/>
+        </symbol>
+        <symbol id="icon_AssetCollections" viewBox="0 0 72 72">
+          <polygon points="47.3,9 48.4,3 23.7,3 22.6,9 0,9 11.3,69 60.7,69 72,9 "/>
+          <polyline class="icon-fill" points="43.6,7 42.5,13 67.2,13 57.4,65 16.1,65 27,7 43.6,7 "/>
+          <polygon class="icon-shade" points="21.8,13 4.8,13 13.3,58.2 "/>
+        </symbol>
+      </defs>
+    </svg>
+  </main>
+</body>
+</html>

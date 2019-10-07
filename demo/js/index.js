@@ -1,8 +1,7 @@
 import Config from "config";
 import Auth from "comps-ui-auth";
-import Postette from "../node_modules/postette/postette.js";
-import templater from "microdata-template";
-import Filtering from "../../filtering.js";
+import Postette from "postette";
+import Filtering from "filtering";
 
 class Index {
 
@@ -46,6 +45,8 @@ class Index {
         window.removeEventListener('touchstart', onFirstTouch, false);
       }, false);
     }, 0);
+
+    Filtering.render();
 
   };
 

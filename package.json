@@ -27,6 +27,7 @@
     "hpc"
   ],
   "dependencies": {
+    "comps-ui-auth": "^1.4.2",
     "lodash": "^4.17.15",
     "microdata-template": "^2.2.2"
   }

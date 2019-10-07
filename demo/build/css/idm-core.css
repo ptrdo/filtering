@@ -780,7 +780,7 @@ menu.dropdown > ul > li > a:hover > ins
   width: 118px;
   height: 24px;
   left: 0;
-  background: no-repeat url(../img/logo/gglogo_118x24.png);
+  /*background: no-repeat url(../img/logo/gglogo_118x24.png);*/
 }
 
 #footer nav > figure:last-of-type
@@ -791,7 +791,7 @@ menu.dropdown > ul > li > a:hover > ins
   width: 298px;
   height: 21px;
   right: 0;
-  background: no-repeat url(../img/logo/idmlogo_298x21.png);
+  /*background: no-repeat url(../img/logo/idmlogo_298x21.png);*/
 }
 
 #footer.open
@@ -813,12 +813,12 @@ menu.dropdown > ul > li > a:hover > ins
 
 #footer.open nav > figure:first-of-type
 {
-  background-image: url(../img/logo/gglogo_118x24_reverse.png);
+  /*background-image: url(../img/logo/gglogo_118x24_reverse.png);*/
 }
 
 #footer.open nav > figure:last-of-type
 {
-  background-image: url(../img/logo/idmlogo_298x21_reverse.png);
+  /*background-image: url(../img/logo/idmlogo_298x21_reverse.png);*/
 }
 
 /* OMNI CONTROLS (persisting) */

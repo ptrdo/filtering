@@ -18,7 +18,9 @@ module.exports = {
   resolve: {
     extensions: ["*", ".js", ".jsx"],
     alias: {
-      config: path.resolve(__dirname, "js/config.js")
+      config: path.resolve(__dirname, "js/config.js"),
+      postette: path.resolve(__dirname, "./node_modules/postette/postette.js"),
+      filtering: path.resolve(__dirname, "../filtering.js")
     }
   },
   plugins: [
@@ -46,6 +48,6 @@ module.exports = {
   },
   devServer: {
     contentBase: "./build",
-    port: 8081
+    port: 8080
   }
 };

@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+/*
+ * (c) 2019 Intellectual Ventures
+ * Filtering History
+ *
+ * @author psylwester(at)intven(dot)com
+ * @version 2.7.0 2017/03/22
+ * @requires normalize.css (or equivalent)
+ * 
+ */
+
+button[class^=filtering] {
+  width: 32px;
+  height: 32px;
+  margin: 2px;
+  padding: 0;
+  background: white linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+  border-radius: 50%;
+  border: 1px dotted silver;
+  text-align: center;
+  cursor: pointer;
+}
+
+button[class^=filtering] i {
+  vertical-align: middle;
+}
+
+button.filtering-toggle {
+  color: #ccccbb;
+}
+
+button.filtering-manifest {
+  color: #0072a2;
+  margin-left: 6px;
+}
+
+button.filtering-toggle:hover {
+  background: #fcd209;
+  color: #fefe88;
+}
+
+button.filtering-manifest:hover {
+  border: 1px solid #0072a2;
+}
+
+button[class^=filtering]:active {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+  border: 1px solid gray;
+  color: #0072a2;
+}
+
+.filtering-favorite button.filtering-toggle {
+  background: white;
+  border-color: white;
+  color: #fcd209;
+}
+
+.filtering-favorite button.filtering-toggle:hover {
+  background: white;
+  color: red;
+}
+
+/* HISTORY */
+
+div#filtering-grid.log aside > div
+{
+  top: 0;
+  opacity: 1;
+  transition: all 200ms ease-out;
+}
+
+div#filtering-grid aside table
+{
+  width: inherit;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+
+div#filtering-grid aside table tr:nth-child(odd)
+{
+  background-color: rgba(120, 110, 100, 0.1);
+}
+
+div#filtering-grid aside table tr:hover
+{
+  background: #fefe88;
+}
+
+div#filtering-grid aside table tr td
+{
+  width: 5%;
+  margin: unset;
+  padding: 0.3em 1em;
+  text-align: center;
+  white-space: nowrap;
+  border: none;
+  border-radius: unset;
+}
+
+div#filtering-grid aside table tr td.href
+{
+  max-width: 16em;
+  padding-right: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+

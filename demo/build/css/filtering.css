@@ -63,48 +63,188 @@ button[class^=filtering]:active {
 
 /* HISTORY */
 
-div#filtering-grid.log aside > div
+aside#filtering 
 {
+  position: absolute;
+  z-index: 2147483147;
   top: 0;
-  opacity: 1;
-  transition: all 200ms ease-out;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: unset;
+  padding: unset;
+  background: rgba(0,0,0,0.4);
 }
 
-div#filtering-grid aside table
+aside#filtering > div
 {
-  width: inherit;
-  border-collapse: separate;
-  border-spacing: 2px;
+  position: fixed;
+  top: 87px;
+  right: 50px;
+  width: 50%;
+  max-height: 50%;
+  background: white;
+  border: 1px solid #0072a2;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-div#filtering-grid aside table tr:nth-child(odd)
+@media only screen and (max-width: 813px) {
+  aside#filtering > div {
+    width: calc(100vw - 30px);
+  }
+}
+
+aside#filtering table
+{
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: left;
+  border: 3px solid white;
+  font-size: unset;
+  font-size: 90%;
+}
+
+aside#filtering table tr:nth-child(even)
 {
   background-color: rgba(120, 110, 100, 0.1);
 }
 
-div#filtering-grid aside table tr:hover
+aside#filtering table tr:hover
 {
   background: #fefe88;
 }
 
-div#filtering-grid aside table tr td
-{
-  width: 5%;
-  margin: unset;
-  padding: 0.3em 1em;
-  text-align: center;
-  white-space: nowrap;
-  border: none;
-  border-radius: unset;
+aside#filtering table tr.filtering {
+  background: #eee8aa;
+  border-bottom: 1px dotted saddlebrown;
 }
 
-div#filtering-grid aside table tr td.href
+aside#filtering table tr.filtering:hover,
+aside#filtering table tr.filtering:hover a {
+  background: #0072a2;
+  color: white;
+}
+
+aside#filtering table tr td
 {
-  max-width: 16em;
-  padding-right: 1em;
+  width: 1%;
+  margin: unset;
+  padding: 0.5em;
+}
+
+aside#filtering table tr td.name
+{
+  width: auto;
+  padding: 0.5em 1em;
+}
+
+aside#filtering table tr td.created
+{
   white-space: nowrap;
-  overflow: hidden;
+}
+
+aside#filtering table tr td.menu
+{
+  padding: 0.5em 0;
+}
+
+aside#filtering table tr td.status
+{
+  padding: 0.5em 1em 0.5em 0;
+}
+
+aside#filtering table tr i.material-icons 
+{
+  color: lightblue;
+}
+
+aside#filtering table tr.filtering i.material-icons
+{
+  color: goldenrod;
+}
+
+aside#filtering table tr:not(.filtering) td.menu i.material-icons
+{
+  visibility: hidden;
+}
+
+/* HISTORY INTERACTION */
+
+aside#filtering table tr td.menu, 
+aside#filtering table tr td.status 
+{
+  cursor: default;
+}
+
+aside#filtering table tr.filtering td.menu:hover,
+aside#filtering table tr:not(.filtering) td.status:hover
+{
+  cursor: pointer;
+}
+
+aside#filtering table tr.filtering td.menu:hover i
+{
+  color: yellow;
+}
+
+aside#filtering table tr:not(.filtering) td.status:hover i
+{
+  color: goldenrod;
+}
+
+aside#filtering table tr.filtering td.menu:active i,
+aside#filtering table tr:not(.filtering) td.status:active i
+{
+  color: #0072a2;
+}
+
+aside#filtering table tr.filtering td.menu menu
+{
+  display: block;
+  position: absolute;
+  width: 11.5em;
+  margin-left: -10em;
+  margin-top: -1.9em;
+  overflow: visible;
+}
+
+aside#filtering table tr.filtering td.menu menu > ul
+{
+  padding: 3px;
+  border: 1px solid #cccccc;
+  border: 1px solid #21374c;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  background-color: white;
+}
+
+aside#filtering table tr.filtering td.menu menu > ul > li
+{
+  display: block;
+  padding: 0.4em 0.7em 0.4em 0.6em;
+  white-space: nowrap;
+  font-weight: normal;
   text-align: left;
-  text-overflow: ellipsis;
+  color: #004766;
+  border-bottom: 1px dotted silver;
+}
+
+aside#filtering table tr.filtering td.menu menu > ul > li:last-of-type
+{
+  border-bottom: 1px solid white;
+}
+
+aside#filtering table tr.filtering td.menu menu > ul > li:focus,
+aside#filtering table tr.filtering td.menu menu > ul > li:hover
+{
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #0072a2;
+}
+
+aside#filtering table tr.filtering td.menu menu > ul > li:active
+{
+  background-color: #004766;
 }
 

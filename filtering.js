@@ -12,35 +12,49 @@ import _ from "lodash";
 
 const moduleElement = () => document.getElementById("explore");
 
-let manifestContainer, messageContainer;
+let manifestContainer;
 
 let collection = [
   {
     id: 1,
-    name: "My most favorite",
+    name: "Simulations WHERE Owner=psylwester",
     href: "Simulations?filters=Owner=psylwester&orderby=DateCreated%20desc&count=1&offset=0",
     status: 1,
     count: 0,
     created: "2019-10-02T22:46:39.574Z"
   }, {
     id: 2,
-    name: "My second-most favorite",
+    name: "Simulations WHERE Owner=psylwester AND DateCreated<=2019-10-01",
     href: "Simulations?filters=Owner=psylwester&orderby=DateCreated%20desc&count=1&offset=0",
     status: 1,
     count: 0,
     created: "2019-10-02T22:46:39.574Z"
   },  {
     id: 3,
-    name: "My third-most favorite",
+    name: "Simulations WHERE Owner=psylwester AND Status=Succeeded",
     href: "Simulations?filters=Owner=psylwester&orderby=DateCreated%20desc&count=1&offset=0",
-    status: 3,
+    status: 0,
+    count: 0,
+    created: "2019-10-02T22:46:39.574Z"
+  },  {
+    id: 4,
+    name: "Simulations WHERE Owner=psylwester AND Status=Succeeded",
+    href: "Simulations?filters=Owner=psylwester&orderby=DateCreated%20desc&count=1&offset=0",
+    status: 0,
+    count: 0,
+    created: "2019-10-02T22:46:39.574Z"
+  },  {
+    id: 5,
+    name: "Simulations WHERE Owner=psylwester AND Status=Succeeded",
+    href: "Simulations?filters=Owner=psylwester&orderby=DateCreated%20desc&count=1&offset=0",
+    status: 0,
     count: 0,
     created: "2019-10-02T22:46:39.574Z"
   }
 
 ];
 
-/* UTILITY */
+/** UTILITY */
 
 const log = function(degree, message) {
 
@@ -74,18 +88,19 @@ const removeMarkup = function (ele) {
   }
 };
 
-/* MANIFEST */
+/** MANIFEST */
 
 /**
  * undoManifest removes a list of the collection from view.
  * @private
  */
-var undoManifest = function() {
+const undoManifest = function() {
   // clearClassList(element, STATE.log);
+  manifestContainer.removeEventListener("click", manifestClickHandler);
   setTimeout(function(){
     removeMarkup(manifestContainer);
     manifestContainer = undefined;
-  },400);
+  },0);
 };
 
 /**
@@ -95,73 +110,102 @@ var undoManifest = function() {
  * @param {Object} addendum is a Model instance to prepend to a list in view.
  */
 const doManifest = function(addendum) {
-  let log, wrap, table, row;
+  let element, wrap, table, row;
   const buildRow = function(item) {
-    let columns = ["id","name", "href", "status"];
-    let d = new Date(item.created);
+    let columns = ["name", "created", "menu", "status"];
+    let when = new Date(item.created);
     let tr = document.createElement("TR");
+    let a = document.createElement("A");
+    let menu = document.createElement("I");
+    let star = document.createElement("I");
     columns.forEach(function(column) {
       let td = document.createElement("TD");
       switch (column) {
         case "created":
-          td.appendChild(document.createTextNode(d.toLocaleTimeString()));
+          td.appendChild(document.createTextNode(when.toLocaleTimeString()));
           break;
-        case "level":
-          td.appendChild(document.createTextNode(item[column]));
-          td.classList.add(item[column]);
+        case "name":
+          a.appendChild(document.createTextNode(item[column]));
+          a.setAttribute("href", item.href);
+          td.appendChild(a);
           break;
-        case "href":
-          td.appendChild(document.createTextNode(item[column]));
-          td.classList.add(column);
+        case "menu":
+          menu.classList.add("material-icons");
+          menu.appendChild(document.createTextNode("more_vert"));
+          td.appendChild(menu);
+          break;          
+        case "status":
+          star.classList.add("material-icons");
+          star.appendChild(document.createTextNode("star"));
+          td.appendChild(star);
           break;
         default:
           td.appendChild(document.createTextNode(item[column]));
       }
+      td.classList.add(column);
       tr.appendChild(td);
     });
+    if (!!item.status) {
+      tr.classList.add("filtering");
+      menu.closest("TD").classList.add("interact");
+    } else {
+      star.closest("TD").classList.add("interact");
+      star.setAttribute("title","remember this filtering");
+    }
     return tr;
   };
   if (element === undefined) {
     // dispatchUI(dismissUI);
+    element = document.body; // moduleElement();
   }
   if (manifestContainer === undefined) {
     wrap = document.createElement("DIV");
     table = document.createElement("TABLE");
     manifestContainer = document.createElement("ASIDE");
     if (collection.length > 0) {
-      for (let i = collection.length - 1; i > -1; i--) {
+      for (let i = 0; i < collection.length; i++) {
         let item = collection[i];
         row = buildRow(item);
         table.appendChild(row);
       }
-      table.querySelector("TD").innerHTML = "Latest";
+      // table.querySelector("TD").innerHTML = "Current";
     } else {
-      row = buildRow(new Model({ message:"There have been no notifications yet!" }));
+      // row = buildRow(new Model({ message:"There have been no notifications yet!" }));
+      row = buildRow({ name: "There have been no filterings yet!" });
       table.appendChild(row);
     }
+    table.classList.add("mono");
     wrap.appendChild(table);
     manifestContainer.appendChild(wrap);
-    if (messageContainer === undefined) {
-      element.appendChild(manifestContainer);
-    } else {
-      element.insertBefore(manifestContainer, messageContainer);
-    }
+    manifestContainer.setAttribute("id", "filtering");
+    manifestContainer.addEventListener("click", manifestClickHandler);
+    element.appendChild(manifestContainer);
     setTimeout(function(){
-      element.classList.add(STATE.log);
+      // element.classList.add("active");
     },0);
-  } else if (!!addendum) {
-    if (manifestContainer !== undefined) {
-      log = manifestContainer.querySelector("TABLE");
-      row = buildRow(addendum);
-      log.insertBefore(row, log.querySelector("TR"));
-    }
   } else {
     undoManifest();
   }
 };
 
+const doContextMenu = function (row) {
+  
+   let menu = document.createElement("MENU");
+   let list = document.createElement("UL");
+   ["Edit Name", "Move to Top", "Remove"].forEach(option => {
+     let item = document.createElement("LI");
+     item.appendChild(document.createTextNode(option));
+     list.appendChild(item);
+   });
+   menu.appendChild(list);
+   row.querySelector("TD.menu").appendChild(menu);
+   
+   menu.addEventListener("click", contextMenuHandler);
+   menu.addEventListener("mouseleave", contextMenuHandler);
+};
 
-/* TRANSACTION */
+
+/** TRANSACTION */
 
 /**
  * fetchHistory is call to get Filter History.
@@ -173,21 +217,21 @@ const fetchHistory = function (successCallback, failureCallback)  {
   let url = "";
 
   getSecure(url)
-      .then(data => {
-        if (successCallback && successCallback instanceof Function) {
-          successCallback();
-        }
-      })
-      .catch(function (error) {
-        if (failureCallback && failureCallback instanceof Function) {
-          failureCallback(error);
-        } else {
-          console.error("filtering.fetchHistory", error);
-        }
-      })
-      .finally(function () {
+  .then(data => {
+    if (successCallback && successCallback instanceof Function) {
+      successCallback();
+    }
+  })
+  .catch(function (error) {
+    if (failureCallback && failureCallback instanceof Function) {
+      failureCallback(error);
+    } else {
+      console.error("filtering.fetchHistory", error);
+    }
+  })
+  .finally(function () {
 
-      });
+  });
 };
 
 /**
@@ -205,7 +249,7 @@ const getSecure = function(url) {
   }).then(response => response.json());
 };
 
-/* INTERACTION */
+/** INTERACTION */
 
 const filterToggleHandler = function (event) {
   event.stopPropagation();
@@ -223,9 +267,32 @@ const filterToggleHandler = function (event) {
 const manifestToggleHandler = function (event) {
   event.stopPropagation();
   event.preventDefault();
-
   doManifest();
 };
+
+const manifestClickHandler = function (event) {
+  if (event.target.closest("TD.interact")) {
+    event.stopPropagation();
+    event.preventDefault();
+    if (event.target.closest("TD.menu")) {
+      doContextMenu(event.target.closest("TR"));
+    } else {
+      // toggleFavorite();
+    }
+  } else {
+    undoManifest();
+  }
+};
+
+const contextMenuHandler = function (event) {
+  event.stopPropagation();
+  let menu = event.target.closest("MENU"); 
+  menu.removeEventListener("click", contextMenuHandler);
+  menu.removeEventListener("mouseleave", contextMenuHandler);
+  removeMarkup(menu);
+};
+
+/** RENDER */
 
 const render = function () {
 
@@ -246,6 +313,7 @@ const render = function () {
       button.setAttribute("title", "remember this");
       filterLocation.appendChild(button);
     } else {
+      button.addEventListener("click", manifestToggleHandler);
       button.setAttribute("title", "show filtering history");
       pagingLocation.appendChild(button);
     }

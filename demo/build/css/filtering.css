@@ -58,12 +58,12 @@ button[class^=filtering]:active {
 
 .filtering-favorite button.filtering-toggle:hover {
   background: white;
-  color: red;
+  cursor: default;
 }
 
 /* HISTORY */
 
-aside#filtering 
+aside#filtering
 {
   position: absolute;
   z-index: 2147483147;
@@ -87,6 +87,7 @@ aside#filtering > div
   border: 1px solid #0072a2;
   overflow-x: hidden;
   overflow-y: auto;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
 }
 
 @media only screen and (max-width: 813px) {
@@ -101,14 +102,14 @@ aside#filtering table
   border-collapse: collapse;
   border-spacing: 0;
   text-align: left;
-  border: 3px solid white;
+  border: 4px solid white;
   font-size: unset;
   font-size: 90%;
 }
 
-aside#filtering table tr:nth-child(even)
+aside#filtering table tr:nth-child(odd)
 {
-  background-color: rgba(120, 110, 100, 0.1);
+  background-color: rgba(180, 165, 150, 0.1);
 }
 
 aside#filtering table tr:hover
@@ -122,7 +123,11 @@ aside#filtering table tr.filtering {
 }
 
 aside#filtering table tr.filtering:hover,
-aside#filtering table tr.filtering:hover a {
+aside#filtering table tr.filtering:hover a,
+aside#filtering table tr.filtering:hover td,
+aside#filtering table tr.filtering.active,
+aside#filtering table tr.filtering.active a,
+aside#filtering table tr.filtering.active td {
   background: #0072a2;
   color: white;
 }
@@ -131,31 +136,53 @@ aside#filtering table tr td
 {
   width: 1%;
   margin: unset;
-  padding: 0.5em;
+  padding: 0.3em;
 }
 
 aside#filtering table tr td.name
 {
   width: auto;
-  padding: 0.5em 1em;
+  padding: 0.3em 1em;
+  cursor: default;
 }
 
-aside#filtering table tr td.created
+aside#filtering table tr td.name:not(.nullify) {
+  cursor: pointer;
+}
+
+aside#filtering table tr td.name:hover a[href] {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+aside#filtering table tr td.visited
 {
   white-space: nowrap;
+  text-align: right;
+  color: burlywood;
+  cursor: default;
 }
 
 aside#filtering table tr td.menu
 {
-  padding: 0.5em 0;
+  padding: 0.3em 0;
 }
 
 aside#filtering table tr td.status
 {
-  padding: 0.5em 1em 0.5em 0;
+  padding: 0.3em 1em 0.3em 0;
 }
 
-aside#filtering table tr i.material-icons 
+@media only screen and (max-width: 813px) {
+  aside#filtering table tr td.name {
+    padding: 0.5em 1em;
+  }
+  aside#filtering table tr td.visited {
+    display: none;
+  }
+}
+
+aside#filtering table tr i.material-icons
 {
   color: lightblue;
 }
@@ -172,8 +199,8 @@ aside#filtering table tr:not(.filtering) td.menu i.material-icons
 
 /* HISTORY INTERACTION */
 
-aside#filtering table tr td.menu, 
-aside#filtering table tr td.status 
+aside#filtering table tr td.menu,
+aside#filtering table tr td.status
 {
   cursor: default;
 }
@@ -200,17 +227,19 @@ aside#filtering table tr:not(.filtering) td.status:active i
   color: #0072a2;
 }
 
-aside#filtering table tr.filtering td.menu menu
+aside#filtering > menu
 {
   display: block;
   position: absolute;
+  top: 129px;
+  right: 95px;
   width: 11.5em;
   margin-left: -10em;
-  margin-top: -1.9em;
+  margin-top: 10px;
   overflow: visible;
 }
 
-aside#filtering table tr.filtering td.menu menu > ul
+aside#filtering > menu > ul
 {
   padding: 3px;
   border: 1px solid #cccccc;
@@ -219,7 +248,7 @@ aside#filtering table tr.filtering td.menu menu > ul
   background-color: white;
 }
 
-aside#filtering table tr.filtering td.menu menu > ul > li
+aside#filtering > menu > ul > li
 {
   display: block;
   padding: 0.4em 0.7em 0.4em 0.6em;
@@ -228,23 +257,57 @@ aside#filtering table tr.filtering td.menu menu > ul > li
   text-align: left;
   color: #004766;
   border-bottom: 1px dotted silver;
+  cursor: pointer !important;
 }
 
-aside#filtering table tr.filtering td.menu menu > ul > li:last-of-type
+aside#filtering > menu > ul > li:last-of-type
 {
   border-bottom: 1px solid white;
 }
 
-aside#filtering table tr.filtering td.menu menu > ul > li:focus,
-aside#filtering table tr.filtering td.menu menu > ul > li:hover
+aside#filtering > menu > ul > li:focus,
+aside#filtering > menu > ul > li:hover
 {
   text-decoration: none;
   color: #ffffff;
   background-color: #0072a2;
 }
 
-aside#filtering table tr.filtering td.menu menu > ul > li:active
+aside#filtering > menu > ul > li:active
 {
   background-color: #004766;
+}
+
+/** DIALOG */
+
+#dialog fieldset.filtering-confirm {
+  width: 100%;
+  margin: -0.5em 0 1em 0;
+}
+
+#dialog fieldset.filtering-confirm > * {
+  display: block;
+  width: 100%;
+}
+
+#dialog fieldset.filtering-confirm label {
+  line-height: 2;
+}
+
+#dialog fieldset.filtering-confirm label > span {
+  font-style: italic;
+  float: right;
+  color: #bbbccc;
+}
+
+#dialog fieldset.filtering-confirm textarea {
+  margin-bottom: 0.5em;
+  background: #f4f2f0;
+  color: #0072a2;
+  resize: vertical;
+}
+
+#dialog fieldset.filtering-confirm input {
+  color: #0072a2;
 }
 
